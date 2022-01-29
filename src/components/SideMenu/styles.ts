@@ -62,6 +62,7 @@ export const Item = styled.div<ItemProps>`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  cursor: pointer;
 
   .main-container {
     display: flex;
