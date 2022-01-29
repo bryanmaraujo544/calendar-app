@@ -4,6 +4,7 @@ export const Container = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 3.2rem;
 
   img {
     width: 3.2rem;

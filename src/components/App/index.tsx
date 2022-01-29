@@ -11,7 +11,7 @@ function App() {
       <GlobaStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />}/>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
