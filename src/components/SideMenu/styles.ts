@@ -8,9 +8,9 @@ export const Container = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  padding: 32px;
+  padding: 3.2rem;
   width: 100%;
-  max-width: 250px;
+  max-width: 25rem;
   min-height: 100vh;
   background: ${({ theme }) => theme.white};
 `;

@@ -5,7 +5,12 @@ interface ThemeProps {
     black: string,
     gray: {
       '100': string,
+      '200': string,
       '300': string,
+      '400': string
+    },
+    shadow:{
+      sm: string
     }
   },
   dark: {
@@ -14,7 +19,12 @@ interface ThemeProps {
     black: string,
     gray: {
       '100': string,
+      '200': string,
       '300': string,
+      '400': string
+    },
+    shadow: {
+      sm: string
     }
   }
 }
@@ -26,7 +36,12 @@ export const theme: ThemeProps = {
     black: '#000',
     gray: {
       100: '#E9ECEF',
-      300: '#6C757D'
+      200: '#EBF5FF',
+      300: '#CED4DA',
+      400: '#6C757D'
+    },
+    shadow: {
+      sm: '#00000010'
     }
   },
   dark: {
@@ -35,7 +50,12 @@ export const theme: ThemeProps = {
     black: '#fff',
     gray: {
       100: '#E9ECEF',
-      300: '#6C757D'
+      200: '#EBF5FF',
+      300: '#CED4DA',
+      400: '#6C757D'
+    },
+    shadow: {
+      sm: '#ffffff10'
     }
   }
 }
