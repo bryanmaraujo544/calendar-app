@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Container, ItemsContainer, Item } from './styles';
 import { Logo } from '../Logo';
 import { motion } from 'framer-motion';
@@ -6,19 +6,24 @@ import { motion } from 'framer-motion';
 import { BsFillCalendarFill, BsFillCheckSquareFill, BsMoonFill } from 'react-icons/bs';
 import { IoLogOut } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from 'styled-components';
 
-export const SideMenu = () => {
+interface Props {
+  setTheme: any,
+}
+
+export const SideMenu = ({ setTheme }: Props) => {
   const navigate = useNavigate();
-  const [isActive, setIsActive] = useState(false);
   const [whichItemIsActive, setWhichItemIsActive] = useState('calendar');
-
-  function handleToggleDarkMode() {
-    setIsActive((prevState) => !prevState);
-  }
+  const theme = useContext(ThemeContext);
 
   function handleChangeTab(location: string) {
     navigate(location)
     setWhichItemIsActive(location);
+  }
+
+  function handleChangeTheme() {
+    setTheme(theme.title === 'light' ? 'dark' : 'light');
   }
 
   return (
@@ -57,8 +62,11 @@ export const SideMenu = () => {
             </div>
             <motion.div
               className="dark-mode-container"
-              onClick={handleToggleDarkMode}
-              style={{ justifyContent: isActive ? 'flex-end' : 'flex-start', background: isActive ? '#6C757D' : '#DEE2E6' }}
+              onClick={handleChangeTheme}
+              style={{
+                justifyContent: theme.title === 'dark' ? 'flex-end' : 'flex-start',
+                background: theme.title === 'dark' ? '#6C757D' : '#DEE2E6'
+              }}
             >
               <div className="circle"></div>
             </motion.div>

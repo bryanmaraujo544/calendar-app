@@ -12,7 +12,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 250px;
   min-height: 100vh;
-  background: #fff;
+  background: ${({ theme }) => theme.white};
 `;
 
 export const ItemsContainer = styled.div`
@@ -35,9 +35,9 @@ export const ItemsContainer = styled.div`
     cursor: pointer;
 
     .icon-container {
-      width: 3rem;
-      height: 3rem;
-      padding: .6rem;
+      width: 3.2rem;
+      height: 3.2rem;
+      padding: .5rem;
       background: #FFEBEB;
       border-radius: .6rem;
 
@@ -50,7 +50,7 @@ export const ItemsContainer = styled.div`
 
     .text {
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-left: .8rem;
       color: #FF1F1F;
     }
@@ -85,7 +85,7 @@ export const Item = styled.div<ItemProps>`
 
     .text {
       font-weight: 700;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       color: #001329;
     }
   }
