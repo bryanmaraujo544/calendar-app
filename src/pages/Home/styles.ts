@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  /* justify-content: flex-start;  */
+  position: relative;
+  display: grid;
+  grid-template-columns: 25rem 1fr;
   width: 100%;
-  height: 100%;
   min-height: 100vh;
+  height: 100vh;
 `;
 
 export const RightSection = styled.section`
@@ -14,7 +15,9 @@ export const RightSection = styled.section`
   position: relative;
   padding: 3.2rem;
   padding-right: 3.2rem;
-  width: 100%;
+  /* width: 100%; */
   height: 100%;
+  width: 100%;
   background: ${({ theme }) => theme.gray[200]};
+  overflow-y: scroll;
 `;
