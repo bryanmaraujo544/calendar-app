@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(7, 1fr );
   grid-template-rows: auto 1fr;
-  gap: .8rem;
+  gap: 1.6rem;
 
   margin-top: 3.2rem;
 
@@ -16,7 +16,6 @@ export const Header = styled.header`
   grid-column: 1 / 8;
   background: ${({ theme }) => theme.white};
   border-radius: 1rem;
-  height: auto;
   padding: 2rem;
   box-shadow: 0 2px 4px ${({ theme }) => theme.shadow.sm};
 
@@ -82,4 +81,43 @@ export const Header = styled.header`
     }
   }
 
+`;
+
+export const CalendarContainer = styled(Header)`
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: .8rem;
+  flex-wrap: wrap;
+  width: 100%;
+
+  .day-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .8rem;
+    padding: .8rem;
+    border-radius: .6rem;
+    border: 1px solid ${({ theme }) => theme.gray[300]};
+
+    .day {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: ${({ theme }) => theme.blue.text};
+    }
+
+    .tasks {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: ${({ theme }) => theme.blue.main[200]};
+    }
+  }
+  .day-container.last-month {
+    .day {
+      color: ${({ theme }) => theme.gray[300]};
+    }
+    .tasks {
+      color: ${({ theme }) => theme.gray[300]};
+    }
+  }
 `;
