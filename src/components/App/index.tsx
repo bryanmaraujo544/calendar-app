@@ -13,7 +13,6 @@ import { theme } from '../../styles/theme';
 
 function App() {
   const [themeMode, setThemeMode] = useLocalStorage('theme', 'light');
-  console.log({ themeMode });
 
   return (
     <ThemeProvider theme={themeMode === 'light' ? theme?.light : theme.dark}>

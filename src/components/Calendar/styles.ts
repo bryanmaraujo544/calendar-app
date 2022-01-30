@@ -65,6 +65,7 @@ export const Header = styled.header`
   .week-container {
     width: 100%;
     display: flex;
+    gap: .8rem;
     margin-top: 2rem;
     padding-top: 2rem;
     border-top: 1px solid ${({ theme }) => theme.gray[300]};

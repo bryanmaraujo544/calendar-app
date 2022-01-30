@@ -1,43 +1,99 @@
+import { useEffect, useState } from 'react';
 import { Container, Header, CalendarContainer } from "./styles";
 
 import { TiArrowSortedUp } from 'react-icons/ti';
 import { getDaysInMonth } from "../../utils/getDaysInMonth";
 import { getDaysOfPreviousMonth } from "../../utils/getDaysOfPreviousMonth";
+import { getMonthName } from '../../utils/getMonthName';
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export const Calendar = () => {
-  const { firstDayDate, daysInMonth } = getDaysInMonth(2022, 0); // This variable grabs how many days the actual month has and the date of the first day of the month
-  const { daysInLastMonth } = getDaysOfPreviousMonth(2022, 0); // How many days the previous month has
+  const dt = new Date();
+  const [date, setDate] = useState({ year: dt.getFullYear(), month: dt.getMonth() });
 
+  const [daysOfActualMonth, setDaysOfActualMonth] = useState([] as number[]);
+  const [lastDaysOfLastMonth, setLastDaysOfLastMonth] = useState([] as number[]);
 
-  // This variable grab the first day of the month and returns which day it as of the week
-  // For example: is the first day of monday was on Saturday, it will return 6. Because Sat is the 7 day of the week
-  // The index of week days is 0 - 6
-  const firstDayMonthInWeekDay = firstDayDate.getDay();
+  useEffect(() => {
+    setDaysOfActualMonth(getDaysOfActualMonth());
+    setLastDaysOfLastMonth(getLastDaysOfLastMonth());
+  }, [date]);
 
+  const { firstDayDate, daysInMonth } = getDaysInMonth(date.year, date.month); // This variable grabs how many days the actual month has and the date of the first day of the month
+  const { daysInLastMonth } = getDaysOfPreviousMonth(date.year, date.month); // How many days the previous month has
 
-  // Here I am pushing all the days of month, for example 1 - 31
-  const daysOfActualMonth = [];
-  for (let i = 1; i <= daysInMonth; i++){
-    daysOfActualMonth.push(i);
+  function getDaysOfActualMonth() {
+    // Here I am pushing all the days of month, for example 1 - 31
+    const daysOfActualMonth = [];
+    for (let i = 1; i <= daysInMonth; i++){
+      daysOfActualMonth.push(i);
+    }
+
+    return daysOfActualMonth as number[];
   }
 
-  // Pushing all days of last month
-  const daysOfLastMonth = [];
-  for (let i = daysInLastMonth; i >= 0; i--) {
-    daysOfLastMonth.push(i);
+  function getLastDaysOfLastMonth() {
+    // This variable grab the first day of the month and returns which day it as of the week
+    // For example: if the first day of month was on Saturday, it will return 6. Because Sat is the 7 day of the week
+    // The index of week days is 0 - 6
+    const firstDayMonthInWeekDay = firstDayDate.getDay();
+
+    // Pushing all days of last month
+    const daysOfLastMonth = [];
+    for (let i = daysInLastMonth; i >= 0; i--) {
+      daysOfLastMonth.push(i);
+    }
+    // Grabbing only last days of previous month,
+    const lastDaysOfLastMonth = daysOfLastMonth.slice(0, firstDayMonthInWeekDay).reverse();
+
+    return lastDaysOfLastMonth;
   }
-  // Grabbing only last days of previous month,
-  const lastDaysOfLastMonth = daysOfLastMonth.slice(0, firstDayMonthInWeekDay).reverse();
+
+  function handlePassToNextMonth() {
+    if (date.month === 11) {
+      setDate(({ year, month }) => (
+        { year: year + 1, month }
+      ));
+    }
+
+    setDate(({ year, month }): any => {
+      if (month === 11) {
+        return { year, month: 0 }
+      } else {
+        return { year, month: month + 1 };
+      }
+    });
+  }
+
+  function handlePassToLastMonth() {
+    if (date.month === 0) {
+      setDate(({ year, month }) => (
+        { year: year - 1, month }
+      ));
+    }
+
+    setDate(({ year, month }): any => {
+      if (month === 0) {
+        return { year, month: 11 }
+      } else {
+        return { year, month: month - 1 };
+      }
+    });
+  }
+
 
   return (
     <Container>
       <Header>
         <div className="date-container">
-          <div className="btn-container"><TiArrowSortedUp className="icon first" /></div>
-          <p className="date">January 2022</p>
-          <div className="btn-container"><TiArrowSortedUp className="icon second" /></div>
+          <div className="btn-container" onClick={handlePassToLastMonth}>
+            <TiArrowSortedUp className="icon first" />
+          </div>
+          <p className="date">{getMonthName(date.month)} {date.year}</p>
+          <div className="btn-container" onClick={handlePassToNextMonth}>
+            <TiArrowSortedUp className="icon second" />
+          </div>
         </div>
         <div className="week-container">
           {weekDays.map((day: string) => (
