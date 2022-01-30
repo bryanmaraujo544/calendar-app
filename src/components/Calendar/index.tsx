@@ -15,7 +15,9 @@ export const Calendar = () => {
 
   const [daysOfActualMonth, setDaysOfActualMonth] = useState([] as number[]);
   const [lastDaysOfLastMonth, setLastDaysOfLastMonth] = useState([] as number[]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [eventDate, setEventDate] = useState('');
 
   useEffect(() => {
     setDaysOfActualMonth(getDaysOfActualMonth());
@@ -29,10 +31,11 @@ export const Calendar = () => {
     // Here I am pushing all the days of month, for example 1 - 31
     const daysOfActualMonth = [];
     for (let i = 1; i <= daysInMonth; i++){
-      daysOfActualMonth.push(i);
+      const dateOfDay = new Date(date.year, date.month, i).toISOString();
+      daysOfActualMonth.push({ day: i, dateOfDay });
     }
 
-    return daysOfActualMonth as number[];
+    return daysOfActualMonth as any;
   }
 
   function getLastDaysOfLastMonth() {
@@ -84,7 +87,8 @@ export const Calendar = () => {
     });
   }
 
-  function handleOpenModal() {
+  function handleOpenModal(dt: string) {
+    setEventDate(dt);
     setIsModalOpen(true);
   }
 
@@ -114,8 +118,8 @@ export const Calendar = () => {
             <p className="tasks">8 tasks</p>
           </div>
         ))}
-        {daysOfActualMonth.map((day: number) => (
-          <div className="day-container" onClick={() => handleOpenModal()}>
+        {daysOfActualMonth.map(({ day, dateOfDay }: any) => (
+          <div className="day-container" onClick={() => handleOpenModal(dateOfDay)}>
             <p className="day">{day}</p>
             <p className="tasks">8 tasks</p>
           </div>
@@ -124,6 +128,7 @@ export const Calendar = () => {
       <Modal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        eventDate={eventDate}
       />
     </Container>
   );
