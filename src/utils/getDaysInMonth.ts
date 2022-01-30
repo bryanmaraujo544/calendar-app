@@ -1,5 +1,4 @@
 export const getDaysInMonth = (year: number, month: number) => {
-  console.log('year: ', year, 'month: ', month);
   // const month = date.getMonth();
   // const year = date.getFullYear();
 

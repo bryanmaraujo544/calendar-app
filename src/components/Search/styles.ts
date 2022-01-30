@@ -20,6 +20,7 @@ export const Container = styled.form`
     width: 100%;
     font-weight: 500;
     color: ${({ theme }) => theme.gray[400]};
+    background: none;
 
     &::placeholder {
       color: ${({ theme }) => theme.gray[400]};

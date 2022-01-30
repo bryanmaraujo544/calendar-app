@@ -14,7 +14,14 @@ interface Props {
 
 export const SideMenu = ({ setTheme }: Props) => {
   const navigate = useNavigate();
-  const [whichItemIsActive, setWhichItemIsActive] = useState('calendar');
+  const [whichItemIsActive, setWhichItemIsActive] = useState(() => {
+    const path = window.location.pathname;
+    if(path === '/calendar' || path === '/') {
+      return 'calendar';
+    }
+    return 'tasks';
+  });
+
   const theme = useContext(ThemeContext);
 
   function handleChangeTab(location: string) {
@@ -58,7 +65,7 @@ export const SideMenu = ({ setTheme }: Props) => {
               <div className="icon-container">
                 <BsMoonFill className="icon" />
               </div>
-              <p className="text">Calendar</p>
+              <p className="text">Dark Mode</p>
             </div>
             <motion.div
               className="dark-mode-container"
