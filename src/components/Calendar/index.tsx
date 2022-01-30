@@ -5,6 +5,7 @@ import { TiArrowSortedUp } from 'react-icons/ti';
 import { getDaysInMonth } from "../../utils/getDaysInMonth";
 import { getDaysOfPreviousMonth } from "../../utils/getDaysOfPreviousMonth";
 import { getMonthName } from '../../utils/getMonthName';
+import { Modal } from '../Modal';
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -14,6 +15,7 @@ export const Calendar = () => {
 
   const [daysOfActualMonth, setDaysOfActualMonth] = useState([] as number[]);
   const [lastDaysOfLastMonth, setLastDaysOfLastMonth] = useState([] as number[]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setDaysOfActualMonth(getDaysOfActualMonth());
@@ -82,6 +84,10 @@ export const Calendar = () => {
     });
   }
 
+  function handleOpenModal() {
+    setIsModalOpen(true);
+  }
+
 
   return (
     <Container>
@@ -109,12 +115,16 @@ export const Calendar = () => {
           </div>
         ))}
         {daysOfActualMonth.map((day: number) => (
-          <div className="day-container">
+          <div className="day-container" onClick={() => handleOpenModal()}>
             <p className="day">{day}</p>
             <p className="tasks">8 tasks</p>
           </div>
         ))}
       </CalendarContainer>
+      <Modal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
     </Container>
   );
 }

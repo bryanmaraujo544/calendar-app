@@ -58,6 +58,7 @@ export const Container = styled.div`
       font-size: 2.4rem;
       color: ${({ theme }) => theme.gray[400]};
       transition: all .2s ease-in;
+
       &:hover {
         color: ${({ theme }) => theme.blue.main[200]};
         transform: scale(1.1);

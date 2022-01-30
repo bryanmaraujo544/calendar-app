@@ -98,6 +98,11 @@ export const CalendarContainer = styled(Header)`
     padding: .8rem;
     border-radius: .6rem;
     border: 1px solid ${({ theme }) => theme.gray[300]};
+    cursor: pointer;
+
+    &:hover {
+      background: ${({ theme }) => theme.gray[200]};
+    }
 
     .day {
       font-size: 1.8rem;

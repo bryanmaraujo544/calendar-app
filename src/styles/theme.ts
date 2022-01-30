@@ -19,7 +19,8 @@ export const theme: any = {
       500: '#6C757D'
     },
     shadow: {
-      sm: '#00000010'
+      sm: '#00000010',
+      md: '#00000025',
     }
   },
   dark: {
@@ -42,7 +43,8 @@ export const theme: any = {
       500: '#6C757D'
     },
     shadow: {
-      sm: '#ffffff10'
+      sm: '#ffffff10',
+      md: '#ffffff25',
     }
   }
 }
