@@ -28,13 +28,30 @@ export const Tasks = (props: any) => {
   const { taskTitle } = useContext(TaskInfosContext);
 
   const filteredTasks = tasks.filter(({ title, description }) => title.includes(taskTitle) || description?.includes(taskTitle));
-  console.log('task title', taskTitle);
+
+  function handleCheckEvent({ title, date }: any) {
+    setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title && task.date !== date))
+  }
   return (
     <Container>
-
       <div className="tasks-container">
-      {filteredTasks.length > 0 && (
-        filteredTasks.map((task) => (
+        {filteredTasks.length > 0 && (
+          filteredTasks.map((task) => (
+            <div className="task-card">
+              <div>
+                <p className="title">{task.title}</p>
+                <p className="desc">{task.description}</p>
+
+              </div>
+              <div className="date-container">
+                <BsFillCalendarEventFill className="icon" />
+                <p className="date">{task.date}</p>
+              </div>
+              <AiFillCheckCircle className="check-icon" onClick={() => handleCheckEvent({ title: task.title, date: task.date })} />
+            </div>
+          ))
+        )}
+        {filteredTasks.length === 0 && tasks.map((task) => (
           <div className="task-card">
             <div>
               <p className="title">{task.title}</p>
@@ -45,25 +62,11 @@ export const Tasks = (props: any) => {
               <BsFillCalendarEventFill className="icon" />
               <p className="date">{task.date}</p>
             </div>
-            <AiFillCheckCircle className="check-icon" />
+            <AiFillCheckCircle className="check-icon" onClick={() => handleCheckEvent({ title: task.title, date: task.date })} />
           </div>
-        ))
-      )}
-      {filteredTasks.length === 0 && tasks.map((task) => (
-        <div className="task-card">
-          <div>
-            <p className="title">{task.title}</p>
-            <p className="desc">{task.description}</p>
-
-          </div>
-          <div className="date-container">
-            <BsFillCalendarEventFill className="icon" />
-            <p className="date">{task.date}</p>
-          </div>
-          <AiFillCheckCircle className="check-icon" />
-        </div>
-      ))}
+        ))}
       </div>
+
     </Container>
   );
 };
