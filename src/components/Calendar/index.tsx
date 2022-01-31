@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Container, Header, CalendarContainer } from "./styles";
 
 import { TiArrowSortedUp } from 'react-icons/ti';
@@ -6,6 +6,8 @@ import { getDaysInMonth } from "../../utils/getDaysInMonth";
 import { getDaysOfPreviousMonth } from "../../utils/getDaysOfPreviousMonth";
 import { getMonthName } from '../../utils/getMonthName';
 import { Modal } from '../Modal';
+import { TasksContext } from '../../contexts/TasksContext';
+import { getFormattedDate } from '../../utils/getFormattedDate';
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -18,6 +20,9 @@ export const Calendar = (props: any) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [eventDate, setEventDate] = useState('');
+
+  const { tasks } = useContext(TasksContext);
+  console.log('tasks', tasks);
 
   useEffect(() => {
     setDaysOfActualMonth(getDaysOfActualMonth());
@@ -92,6 +97,12 @@ export const Calendar = (props: any) => {
     setIsModalOpen(true);
   }
 
+  function handleGetTasksInThatDate(dt: string) {
+    const formattedDate = getFormattedDate(dt);
+    const tasksOnDate: any = tasks.filter((task: any) => task.date === formattedDate);
+    return tasksOnDate.length;
+  }
+
 
   return (
     <Container>
@@ -121,7 +132,7 @@ export const Calendar = (props: any) => {
         {daysOfActualMonth.map(({ day, dateOfDay }: any) => (
           <div className="day-container" onClick={() => handleOpenModal(dateOfDay)}>
             <p className="day">{day}</p>
-            <p className="tasks">8 tasks</p>
+            <p className="tasks">{handleGetTasksInThatDate(dateOfDay)} tasks</p>
           </div>
         ))}
       </CalendarContainer>

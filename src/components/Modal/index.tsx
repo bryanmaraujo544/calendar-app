@@ -9,6 +9,7 @@ import { modalVariants } from '../../variants/modalVariants';
 import { IoClose } from 'react-icons/io5';
 import { TasksContext } from '../../contexts/TasksContext';
 import { useErrors } from '../../hooks/useErrors';
+import { getFormattedDate } from '../../utils/getFormattedDate';
 
 interface Props {
   isModalOpen: boolean,
@@ -29,18 +30,14 @@ export const Modal = ({
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
 
-  const dt = new Date(eventDate);
-  const month = (dt.getMonth() < 10 ? '0' : '') + (dt.getMonth() + 1);
-  const day = (dt.getDate() < 10 ? '0' : '') + (dt.getDate());
-
-
+  const dateFormatted = getFormattedDate(eventDate);
 
   useEffect(() => {
     if (isModalOpen) {
       overlayControl.start('show');
     }
 
-    setDate(`${dt.getFullYear().toString()}-${month.toString()}-${day.toString()}`);
+    setDate(dateFormatted);
   }, [isModalOpen]);
 
   function handleCloseModal() {
@@ -83,7 +80,6 @@ export const Modal = ({
     if (title !== '' && errors.length === 0){
       setTasks((prevTaks: any) => [...prevTaks, { title, description, date }]);
       handleCloseModal();
-      console.log('submit');
     } else {
       window.alert('Something is wrong :(');
     }
