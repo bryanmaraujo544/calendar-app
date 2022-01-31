@@ -74,6 +74,12 @@ export const Modal = ({
 
   function handleSubmit(event: any) {
     event.preventDefault();
+    const taskAlreadyExistsOnThatDay = tasks.some((task) => task.title === title && task.date === date);
+
+    if (taskAlreadyExistsOnThatDay) {
+      return window.alert('This event already exists on this date');
+    }
+
     if (title !== '' && errors.length === 0){
       setTasks((prevTaks: any) => [...prevTaks, { title, description, date }]);
       handleCloseModal();
