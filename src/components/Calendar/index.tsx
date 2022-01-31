@@ -103,7 +103,6 @@ export const Calendar = (props: any) => {
     return tasksOnDate.length;
   }
 
-
   return (
     <Container>
       <Header>

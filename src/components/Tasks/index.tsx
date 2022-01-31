@@ -30,14 +30,15 @@ export const Tasks = (props: any) => {
   const filteredTasks = tasks.filter(({ title, description }) => title.includes(taskTitle) || description?.includes(taskTitle));
 
   function handleCheckEvent({ title, date }: any) {
-    setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title && task.date !== date))
+    console.log({ title, date });
+    setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title || task.date !== date ));
   }
   return (
     <Container>
       <div className="tasks-container">
         {filteredTasks.length > 0 && (
           filteredTasks.map((task) => (
-            <div className="task-card">
+            <div className="task-card" key={`${task.title}${task.date}`}>
               <div>
                 <p className="title">{task.title}</p>
                 <p className="desc">{task.description}</p>
@@ -52,7 +53,7 @@ export const Tasks = (props: any) => {
           ))
         )}
         {filteredTasks.length === 0 && tasks.map((task) => (
-          <div className="task-card">
+          <div className="task-card" key={`${task.title}${task.date}`}>
             <div>
               <p className="title">{task.title}</p>
               <p className="desc">{task.description}</p>
