@@ -52,14 +52,6 @@ export const Form = styled.form`
   gap: 1.2rem;
   margin-top: .8rem;
 
-  input {
-    background: ${({ theme }) => theme.gray[100]};
-    border-radius: .8rem;
-    padding: 1.6rem;
-    color: ${({ theme }) => theme.gray[500]};
-    font-weight: 500;
-    box-shadow: 0 1px 4px ${({ theme }) => theme.shadow.md};
-  }
 
   button {
     margin-top: .8rem;
@@ -77,5 +69,29 @@ export const Form = styled.form`
     &:active {
       background: ${({ theme }) => theme.blue.main[100]};
     }
+  }
+  `;
+
+export const InputGroup = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  input {
+    width: 100%;
+    background: ${({ theme }) => theme.gray[100]};
+    border-radius: .8rem;
+    padding: 1.6rem;
+    color: ${({ theme }) => theme.gray[500]};
+    font-weight: 500;
+    box-shadow: 0 1px 4px ${({ theme }) => theme.shadow.md};
+  }
+
+  .error-msg {
+    color: ${({ theme }) => theme.red[200]};
+    font-size: 1.2rem;
+    margin-top: .4rem;
+    text-transform: capitalize;
   }
 `;

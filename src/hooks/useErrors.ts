@@ -8,7 +8,7 @@ interface ErrorProps {
 interface UseErrorsProps {
   setError({ field, message }: ErrorProps): void,
   removeError(fieldName: string): void,
-  getErrorMessageByFieldName(fieldName: string): void,
+  getErrorMessageByFieldName(fieldName: string): string,
   errors: any
 }
 
@@ -36,6 +36,8 @@ export const useErrors = () => {
   function getErrorMessageByFieldName(fieldName: string) {
     return errors.find((error: ErrorProps) => error.field === fieldName)?.message;
   }
+
+  // getErrorMessageByFieldName('title');
 
   return {
     setError, removeError, getErrorMessageByFieldName, errors

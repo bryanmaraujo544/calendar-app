@@ -32,8 +32,11 @@ export const Tasks = () => {
 
       {tasks.map((task) => (
         <div className="task-card">
-          <p className="title">{task.title}</p>
-          <p className="desc">{task.description}</p>
+          <div>
+            <p className="title">{task.title}</p>
+            <p className="desc">{task.description}</p>
+
+          </div>
           <div className="date-container">
             <BsFillCalendarEventFill className="icon" />
             <p className="date">{task.date}</p>

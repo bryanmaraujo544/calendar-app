@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Overlay, ModalContainer, Form } from './styles';
+import { Overlay, ModalContainer, Form, InputGroup } from './styles';
 import { motion, useAnimation } from 'framer-motion';
 
 import { overlayVariants } from '../../variants/overlayVariants';
@@ -23,7 +23,7 @@ export const Modal = ({
 }: Props) => {
   const overlayControl = useAnimation();
   const { tasks, setTasks } = useContext(TasksContext);
-  const { setError, removeError, errors } = useErrors();
+  const { setError, removeError, getErrorMessageByFieldName, errors } = useErrors();
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -45,6 +45,11 @@ export const Modal = ({
 
   function handleCloseModal() {
     setIsModalOpen(false);
+    setTitle('');
+    setDescription('');
+    setDate('');
+    removeError('title');
+    removeError('description');
     overlayControl.start('hidden');
   }
 
@@ -60,7 +65,7 @@ export const Modal = ({
 
   function handleChangeDescription(event: any) {
     setDescription(event.target.value);
-    if (event.target.value.length > 200) {
+    if (event.target.value.length === 72) {
       setError({ field: 'description', message: "Description is too long"  });
     } else {
       removeError('description');
@@ -69,12 +74,16 @@ export const Modal = ({
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    console.log({ title, description, date });
-
-    setTasks((prevTaks: any) => [...prevTaks, { title, description, date }]);
+    if (title !== '' && errors.length === 0){
+      setTasks((prevTaks: any) => [...prevTaks, { title, description, date }]);
+      handleCloseModal();
+      console.log('submit');
+    } else {
+      window.alert('Something is wrong :(');
+    }
   }
 
-
+  console.log();
 
   return ReactDOM.createPortal(
     <Overlay
@@ -91,9 +100,21 @@ export const Modal = ({
           <IoClose className="close-icon" onClick={handleCloseModal} />
         </header>
         <Form onSubmit={handleSubmit}>
-          <input placeholder="Title of event" onChange={handleChangeTitle} />
-          <input placeholder="Description of event" onChange={handleChangeDescription} />
-          <input value={date} type="date" onChange={(e) => setDate(e.target.value)} />
+          <InputGroup>
+            <input value={title} placeholder="Title of event" onChange={handleChangeTitle} />
+            {errors.some((error: any) => error.field === 'title') && (
+              <span className="error-msg">{getErrorMessageByFieldName('title')}</span>
+            )}
+          </InputGroup>
+          <InputGroup>
+            <input value={description}  placeholder="Description of event" onChange={handleChangeDescription} maxLength={72} />
+            {errors.some((error: any) => error.field === 'description') && (
+              <span className="error-msg">{getErrorMessageByFieldName('description')}</span>
+            )}
+          </InputGroup>
+          <InputGroup>
+            <input value={date} type="date" onChange={(e) => setDate(e.target.value)} />
+          </InputGroup>
           <button type="submit">Create</button>
         </Form>
       </ModalContainer>

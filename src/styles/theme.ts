@@ -3,6 +3,10 @@ export const theme: any = {
     title: 'light',
     white: '#fff',
     black: '#000',
+    red: {
+      100: '#FFEBEB',
+      200: '#FF1F1F',
+    },
     blue: {
       main: {
         100: '#479DFF',
@@ -27,6 +31,10 @@ export const theme: any = {
     title: 'dark',
     white: '#000',
     black: '#fff',
+    red: {
+      100: '#FFEBEB',
+      200: '#FF1F1F',
+    },
     blue: {
       main: {
         100: '#479DFF',

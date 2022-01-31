@@ -19,11 +19,17 @@ export const Container = styled.div`
     box-shadow: 0 1px 3px ${({ theme }) => theme.shadow.sm};
     border-radius: 1rem;
     padding: 1.6rem;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     .title {
       font-size: 1.4rem;
       font-weight: 700;
       color: ${({ theme }) => theme.blue.text};
+      width: 100%;
+      overflow-x: hidden;
     }
 
     .desc {
@@ -31,6 +37,8 @@ export const Container = styled.div`
       font-weight: 500;
       color: ${({ theme }) => theme.gray[500]};
       margin-top: .4rem;
+      width: 100%;
+      overflow-x: hidden;
     }
 
     .date-container {
