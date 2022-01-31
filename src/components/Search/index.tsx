@@ -4,17 +4,19 @@ import { RiSearch2Line } from 'react-icons/ri';
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const Search = ({ setWhichItemIsActive }: any) => {
+interface Props {
+  setWhichItemIsActive: any,
+  taskTitle: string,
+  setTaskTitle: any
+}
+
+export const Search = ({ setWhichItemIsActive, taskTitle, setTaskTitle }: Props) => {
   const navigate = useNavigate();
-  const [taskTitle, setTaskTitle] = useState('');
 
   function handleChangeTaskTitle(event: any) {
     setTaskTitle(event.target.value);
 
-    if (event.target.value === ''){
-      navigate('calendar');
-      setWhichItemIsActive('calendar');
-    } else {
+    if (event.target.value !== ''){
       navigate('tasks');
       setWhichItemIsActive('tasks');
     }

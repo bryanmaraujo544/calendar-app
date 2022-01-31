@@ -3,6 +3,7 @@ import { BsFillCalendarEventFill } from 'react-icons/bs';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { useContext } from 'react';
 import { TasksContext } from '../../contexts/TasksContext';
+import { TaskInfosContext } from '../../pages/Home';
 
 // const tasks = [
 //   {
@@ -22,15 +23,33 @@ import { TasksContext } from '../../contexts/TasksContext';
 //   },
 // ]
 
-export const Tasks = () => {
+export const Tasks = (props: any) => {
   const { tasks, setTasks } = useContext(TasksContext);
-  console.log('TASKS', tasks);
+  const { taskTitle } = useContext(TaskInfosContext);
+
+  const filteredTasks = tasks.filter(({ title, description }) => title.includes(taskTitle) || description?.includes(taskTitle));
+  console.log('task title', taskTitle);
   return (
     <Container>
 
       <div className="tasks-container">
+      {filteredTasks.length > 0 && (
+        filteredTasks.map((task) => (
+          <div className="task-card">
+            <div>
+              <p className="title">{task.title}</p>
+              <p className="desc">{task.description}</p>
 
-      {tasks.map((task) => (
+            </div>
+            <div className="date-container">
+              <BsFillCalendarEventFill className="icon" />
+              <p className="date">{task.date}</p>
+            </div>
+            <AiFillCheckCircle className="check-icon" />
+          </div>
+        ))
+      )}
+      {filteredTasks.length === 0 && tasks.map((task) => (
         <div className="task-card">
           <div>
             <p className="title">{task.title}</p>

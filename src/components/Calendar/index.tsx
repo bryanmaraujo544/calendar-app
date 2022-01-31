@@ -9,7 +9,7 @@ import { Modal } from '../Modal';
 
 const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export const Calendar = () => {
+export const Calendar = (props: any) => {
   const dt = new Date();
   const [date, setDate] = useState({ year: dt.getFullYear(), month: dt.getMonth() });
 
