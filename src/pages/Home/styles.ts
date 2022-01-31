@@ -7,6 +7,10 @@ export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
   height: 100vh;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const RightSection = styled.section`
@@ -20,4 +24,12 @@ export const RightSection = styled.section`
   width: 100%;
   background: ${({ theme }) => theme.gray[200]};
   overflow-y: scroll;
+
+  @media (max-width: 468px) {
+    padding: 2.2rem;
+  }
+
+  @media (max-width: 310px) {
+    padding: 1.6rem;
+  }
 `;

@@ -5,7 +5,21 @@ export const Container = styled.div`
   height: 5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 1.6rem;
+
+  .menu-icon {
+    display: none;
+    font-size: 3.6rem;
+    margin-right: 1.6rem;
+    height: 100%;
+    color: ${({ theme }) => theme.gray[500]};
+
+    @media(max-width: 768px) {
+      display: inline-block;
+    }
+
+  }
 
   .profile-container {
     height: 100%;

@@ -11,6 +11,8 @@ export const TaskInfosContext = createContext({} as any);
 export const Home = ({ setTheme }: any) => {
   const [taskTitle, setTaskTitle] = useState('');
 
+  const [sideMenuIsOpen, setSideMenuIsOpen] = useState(false);
+
   const [whichItemIsActive, setWhichItemIsActive] = useState(() => {
     const path = window.location.pathname;
     if (path === '/calendar' || path === '/') {
@@ -27,6 +29,8 @@ export const Home = ({ setTheme }: any) => {
             setTheme={setTheme}
             whichItemIsActive={whichItemIsActive}
             setWhichItemIsActive={setWhichItemIsActive}
+            sideMenuIsOpen={sideMenuIsOpen}
+            setSideMenuIsOpen={setSideMenuIsOpen}
           />
           <RightSection>
             <Header
@@ -34,6 +38,7 @@ export const Home = ({ setTheme }: any) => {
               setWhichItemIsActive={setWhichItemIsActive}
               taskTitle={taskTitle}
               setTaskTitle={setTaskTitle}
+              setSideMenuIsOpen={setSideMenuIsOpen}
             />
             <Outlet
             />

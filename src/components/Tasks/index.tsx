@@ -30,7 +30,6 @@ export const Tasks = (props: any) => {
   const filteredTasks = tasks.filter(({ title, description }) => title.includes(taskTitle) || description?.includes(taskTitle));
 
   function handleCheckEvent({ title, date }: any) {
-    console.log({ title, date });
     setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title || task.date !== date ));
   }
   return (

@@ -4,7 +4,25 @@ interface ItemProps {
   isActive?: boolean
 }
 
+export const Overlay = styled.div`
+
+  @media(max-width: 768px) {
+    position: absolute;
+    display: none;
+    left: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #00000050;
+    z-index: 15;
+
+  }
+`;
+
 export const Container = styled.div`
+  position: relative;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -12,6 +30,26 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   background: ${({ theme }) => theme.white};
+  z-index: 15;
+
+  @media (max-width: 768px) {
+    position: absolute;
+    width: 250px;
+    z-index: 10;
+  }
+
+  .close-icon {
+    position: absolute;
+    top: 1.6rem;
+    right: 1.6rem;
+    font-size: 2.6rem;
+    display: none;
+    color: ${({ theme }) => theme.gray[500]};
+
+    @media (max-width: 768px) {
+      display: inline-block;
+    }
+  }
 `;
 
 export const ItemsContainer = styled.div`

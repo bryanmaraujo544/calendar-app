@@ -6,6 +6,7 @@ export const Container = styled.form`
   gap: 1.6rem;
   background: ${({ theme }) => theme.white};
   width: 100%;
+  height: 100%;
   border-radius: 1rem;
   padding: 0 1.6rem;
   box-shadow: 0 2px 4px ${({ theme }) => theme.shadow.sm};

@@ -14,7 +14,6 @@ interface UseErrorsProps {
 
 export const useErrors = () => {
   const [errors, setErrors] = useState([] as any);
-  console.log('errors', errors);
 
   function setError({ field, message }: ErrorProps) {
     const errorAlreadyExists = errors.find((error: ErrorProps) => error.field === field);

@@ -17,12 +17,28 @@ export const Header = styled.header`
   padding: 2rem;
   box-shadow: 0 2px 4px ${({ theme }) => theme.shadow.sm};
 
+  @media(max-width: 468px) {
+    padding: 1.6rem;
+  }
+
+  @media(max-width: 310px) {
+    padding: 1.2rem;
+  }
+
   .date-container {
     display: flex;
     width: 100%;
     justify-content: center;
     align-items: center;
     gap: 3.2rem;
+
+    @media (max-width: 468px) {
+      gap: 2.4rem;
+    }
+
+    @media (max-width: 310px) {
+      gap: 1.6rem;
+    }
 
     .btn-container {
       display: flex;
@@ -58,7 +74,8 @@ export const Header = styled.header`
     .date {
       font-weight: 700;
       font-size: 1.4rem;
-      color: ${({ theme }) => theme.blue.text}
+      color: ${({ theme }) => theme.blue.text};
+      text-align: center;
     }
   }
 
@@ -70,6 +87,10 @@ export const Header = styled.header`
     padding-top: 2rem;
     border-top: 1px solid ${({ theme }) => theme.gray[300]};
 
+    @media (max-width: 420px) {
+      gap: .4rem;
+    }
+
     .week-day {
       flex: 1;
       font-size: 1.3rem;
@@ -77,6 +98,14 @@ export const Header = styled.header`
       color: ${({ theme }) => theme.gray[400]};
       text-transform: uppercase;
       letter-spacing: 1px;
+
+      @media (max-width: 420px) {
+        font-size: 1.1rem;
+      }
+
+      @media (max-width: 310px) {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -88,6 +117,10 @@ export const CalendarContainer = styled(Header)`
   gap: .8rem;
   flex-wrap: wrap;
   width: 100%;
+
+  @media (max-width: 420px) {
+    gap: .4rem;
+  }
 
   .day-container {
     display: flex;
@@ -104,16 +137,35 @@ export const CalendarContainer = styled(Header)`
       background: ${({ theme }) => theme.gray[200]};
     }
 
+    @media (max-width: 420px) {
+      gap: .4rem;
+      padding: .4rem;
+    }
+
     .day {
       font-size: 1.8rem;
       font-weight: 700;
       color: ${({ theme }) => theme.blue.text};
+
+      @media (max-width: 420px) {
+        font-size: 1.2rem;
+      }
+
+      @media (max-width: 310px) {
+        font-size: 1rem;
+      }
     }
 
     .tasks {
       font-size: 1.2rem;
       font-weight: 500;
       color: ${({ theme }) => theme.blue.main[200]};
+
+      span {
+        @media (max-width: 420px) {
+          display: none;
+        }
+      }
     }
   }
   .day-container.last-month {

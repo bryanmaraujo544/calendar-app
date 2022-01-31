@@ -22,7 +22,6 @@ export const Calendar = (props: any) => {
   const [eventDate, setEventDate] = useState('');
 
   const { tasks } = useContext(TasksContext);
-  console.log('tasks', tasks);
 
   useEffect(() => {
     setDaysOfActualMonth(getDaysOfActualMonth());
@@ -125,13 +124,13 @@ export const Calendar = (props: any) => {
         {lastDaysOfLastMonth.map((day) => (
           <div className="day-container last-month">
             <p className="day">{day}</p>
-            <p className="tasks">8 tasks</p>
+            <p className="tasks">- <span>tasks</span></p>
           </div>
         ))}
         {daysOfActualMonth.map(({ day, dateOfDay }: any) => (
           <div className="day-container" onClick={() => handleOpenModal(dateOfDay)}>
             <p className="day">{day}</p>
-            <p className="tasks">{handleGetTasksInThatDate(dateOfDay)} tasks</p>
+            <p className="tasks">{handleGetTasksInThatDate(dateOfDay)} <span>tasks</span></p>
           </div>
         ))}
       </CalendarContainer>

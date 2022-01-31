@@ -52,7 +52,6 @@ export const Modal = ({
 
   function handleChangeTitle(event: any) {
     setTitle(event.target.value);
-    console.log('event', event.target.value);
     if (!event.target.value) {
       setError({ field: 'title', message: "title can't be empty"  });
     } else {
@@ -84,8 +83,6 @@ export const Modal = ({
       window.alert('Something is wrong :(');
     }
   }
-
-  console.log();
 
   return ReactDOM.createPortal(
     <Overlay

@@ -1,10 +1,10 @@
 export const overlayVariants = {
   hidden: {
-    opacity: 0,
-    display: 'none',
     transition: {
       when: 'afterChildren',
-    }
+    },
+    opacity: 0,
+    display: 'none',
   },
   show: {
     opacity: 1,
