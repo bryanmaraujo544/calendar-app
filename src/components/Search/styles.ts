@@ -12,18 +12,18 @@ export const Container = styled.form`
 
   .icon {
     font-size: 2rem;
-    color: ${({ theme }) => theme.gray[400]};
+    color: ${({ theme }) => theme.gray[500]};
   }
 
   input {
     height: 100%;
     width: 100%;
     font-weight: 500;
-    color: ${({ theme }) => theme.gray[400]};
+    color: ${({ theme }) => theme.gray[500]};
     background: none;
 
     &::placeholder {
-      color: ${({ theme }) => theme.gray[400]};
+      color: ${({ theme }) => theme.gray[500]};
     }
   }
 `;

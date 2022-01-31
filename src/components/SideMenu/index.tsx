@@ -10,17 +10,12 @@ import { ThemeContext } from 'styled-components';
 
 interface Props {
   setTheme: any,
+  whichItemIsActive: string,
+  setWhichItemIsActive: any
 }
 
-export const SideMenu = ({ setTheme }: Props) => {
+export const SideMenu = ({ setTheme, whichItemIsActive, setWhichItemIsActive }: Props) => {
   const navigate = useNavigate();
-  const [whichItemIsActive, setWhichItemIsActive] = useState(() => {
-    const path = window.location.pathname;
-    if(path === '/calendar' || path === '/') {
-      return 'calendar';
-    }
-    return 'tasks';
-  });
 
   const theme = useContext(ThemeContext);
 
