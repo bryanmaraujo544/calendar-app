@@ -3,7 +3,7 @@ import { BsFillCalendarEventFill } from 'react-icons/bs';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { useContext } from 'react';
 import { TasksContext } from '../../contexts/TasksContext';
-import { TaskInfosContext } from '../../pages/Home';
+import { HomeContext } from '../../pages/Home';
 
 // const tasks = [
 //   {
@@ -25,7 +25,7 @@ import { TaskInfosContext } from '../../pages/Home';
 
 export const Tasks = (props: any) => {
   const { tasks, setTasks } = useContext(TasksContext);
-  const { taskTitle } = useContext(TaskInfosContext);
+  const { taskTitle } = useContext(HomeContext);
 
   const filteredTasks = tasks.filter(({ title, description }) => title.includes(taskTitle) || description?.includes(taskTitle));
 

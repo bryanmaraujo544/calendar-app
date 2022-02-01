@@ -14,24 +14,25 @@ import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 import { overlayVariants } from '../../variants/overlayVariants';
 import { modalVariants } from '../../variants/modalVariants';
 import { sideMenuVariants } from '../../variants/sideMenuVariants';
+import { HomeContext } from '../../pages/Home';
 
 interface Props {
   setTheme: any,
-  whichItemIsActive: string,
-  setWhichItemIsActive: any,
   setSideMenuIsOpen: any,
   sideMenuIsOpen: boolean
 }
 
 export const SideMenu = ({
   setTheme,
-  whichItemIsActive,
-  setWhichItemIsActive,
   setSideMenuIsOpen,
   sideMenuIsOpen
 }: Props) => {
   const navigate = useNavigate();
   const sideMenuControl = useAnimation();
+  const theme = useContext(ThemeContext);
+
+  // This states is in Home components, because them need to be accessed by the calendar components and the search component
+  const { whichItemIsActive, setWhichItemIsActive } = useContext(HomeContext);
 
   const windowDimensions = useWindowDimensions();
 
@@ -43,7 +44,6 @@ export const SideMenu = ({
     }
   }, [sideMenuIsOpen]);
 
-  const theme = useContext(ThemeContext);
 
   function handleChangeTab(location: string) {
     navigate(location)

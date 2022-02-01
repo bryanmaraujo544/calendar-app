@@ -6,13 +6,18 @@ import { Outlet } from 'react-router-dom';
 import { Header } from '../../components/Header';
 import { TasksProvider } from '../../contexts/TasksContext';
 
-export const TaskInfosContext = createContext({} as any);
+interface CtxProps {
+  taskTitle: string,
+  setTaskTitle: any,
+  whichItemIsActive: string,
+  setWhichItemIsActive: any
+}
+
+export const HomeContext = createContext({} as CtxProps);
 
 export const Home = ({ setTheme }: any) => {
   const [taskTitle, setTaskTitle] = useState('');
-
   const [sideMenuIsOpen, setSideMenuIsOpen] = useState(false);
-
   const [whichItemIsActive, setWhichItemIsActive] = useState(() => {
     const path = window.location.pathname;
     if (path === '/calendar' || path === '/') {
@@ -23,29 +28,23 @@ export const Home = ({ setTheme }: any) => {
 
   return (
     <TasksProvider>
-      <TaskInfosContext.Provider value={{ taskTitle, setTaskTitle }}>
+      <HomeContext.Provider value={{ taskTitle, setTaskTitle, whichItemIsActive, setWhichItemIsActive }}>
         <Container>
           <SideMenu
             setTheme={setTheme}
-            whichItemIsActive={whichItemIsActive}
-            setWhichItemIsActive={setWhichItemIsActive}
             sideMenuIsOpen={sideMenuIsOpen}
             setSideMenuIsOpen={setSideMenuIsOpen}
           />
           <RightSection>
             <Header
-              whichItemIsActive={whichItemIsActive}
-              setWhichItemIsActive={setWhichItemIsActive}
-              taskTitle={taskTitle}
-              setTaskTitle={setTaskTitle}
               setSideMenuIsOpen={setSideMenuIsOpen}
             />
-            <Outlet
-            />
+            {/* Outlet is a component renderes based on which nested route is active */}
+            <Outlet />
           </RightSection>
         </Container>
 
-      </TaskInfosContext.Provider>
+      </HomeContext.Provider>
     </TasksProvider>
   );
 }

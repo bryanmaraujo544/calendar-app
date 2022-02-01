@@ -10,6 +10,7 @@ export const Overlay = styled.div`
   top: 0;
   left: 0;
   background: #00000030;
+  z-index: 9999;
 
 `;
 
