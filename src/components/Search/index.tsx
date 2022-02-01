@@ -1,17 +1,14 @@
-import { Container } from "./styles";
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { HomeContext } from '../../pages/Home';
+import { Container } from './styles';
 
 import { RiSearch2Line } from 'react-icons/ri';
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
-interface Props {
-  setWhichItemIsActive: any,
-  taskTitle: string,
-  setTaskTitle: any
-}
 
-export const Search = ({ setWhichItemIsActive, taskTitle, setTaskTitle }: Props) => {
+export const Search = () => {
   const navigate = useNavigate();
+  const { taskTitle, setTaskTitle, setWhichItemIsActive } = useContext(HomeContext);
 
   function handleChangeTaskTitle(event: any) {
     setTaskTitle(event.target.value);

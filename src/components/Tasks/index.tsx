@@ -5,29 +5,11 @@ import { useContext } from 'react';
 import { TasksContext } from '../../contexts/TasksContext';
 import { HomeContext } from '../../pages/Home';
 
-// const tasks = [
-//   {
-//     title: 'Work with my mom',
-//     description: 'I need to help my mom make the food for today dinner',
-//     date: 'Sun Jan 30 2022'
-//   },
-//   {
-//     title: 'Build a timer app',
-//     description: 'Start to develop my timer app',
-//     date: 'Sun Feb 30 2022'
-//   },
-//   {
-//     title: 'Build a timer app',
-//     description: 'Start to develop my timer app',
-//     date: 'Sun Feb 30 2022'
-//   },
-// ]
-
 export const Tasks = (props: any) => {
   const { tasks, setTasks } = useContext(TasksContext);
   const { taskTitle } = useContext(HomeContext);
 
-  const filteredTasks = tasks.filter(({ title, description }) => title.includes(taskTitle) || description?.includes(taskTitle));
+  const filteredTasks = tasks.filter(({ title, description, date }) => title.includes(taskTitle) || description?.includes(taskTitle) || date?.includes(taskTitle) );
 
   function handleCheckEvent({ title, date }: any) {
     setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title || task.date !== date ));

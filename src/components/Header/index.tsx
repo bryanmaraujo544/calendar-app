@@ -16,7 +16,7 @@ export const Header = ({
   return (
     <Container>
       <HiMenuAlt2 className="menu-icon" onClick={() => setSideMenuIsOpen(true)}/>
-      <Search setWhichItemIsActive={setWhichItemIsActive} taskTitle={taskTitle} setTaskTitle={setTaskTitle} />
+      <Search />
       <div className="profile-container">
         <img src={noImage} alt="profile-img" />
       </div>

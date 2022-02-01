@@ -14,7 +14,7 @@ import { CalendarHeader } from './CalendarHeader';
 export const Calendar = (props: any) => {
   const navigate = useNavigate();
   const { tasks } = useContext(TasksContext);
-  const { setWhichItemIsActive } = useContext(HomeContext);
+  const { setWhichItemIsActive, setTaskTitle } = useContext(HomeContext);
 
   const dt = new Date();
   const [date, setDate] = useState({ year: dt.getFullYear(), month: dt.getMonth() }); // State to storage the actual month and year of calendar
@@ -31,6 +31,11 @@ export const Calendar = (props: any) => {
     setDaysOfActualMonth(getDaysOfActualMonth());
     setLastDaysOfLastMonth(getLastDaysOfLastMonth());
   }, [date]);
+
+  // Every Time the calendar is renderes, ensure the search is cleaned
+  useEffect(() => {
+    setTaskTitle('');
+  }, []);
 
   function getDaysOfActualMonth() {
     // Here I am pushing all the days of month, for example 1 - 31
@@ -71,10 +76,13 @@ export const Calendar = (props: any) => {
     setIsModalOpen(true);
   }
 
-  function handleGoToTasks() {
+  function handleSeeTasksByDate(dt: string) {
+    const formattedDate = getFormattedDate(dt); // 2022-04-39
+    setTaskTitle(formattedDate);
     navigate('/tasks');
     setWhichItemIsActive('tasks');
   }
+
 
   return (
     <Container>
@@ -92,7 +100,7 @@ export const Calendar = (props: any) => {
         {daysOfActualMonth.map(({ day, dateOfDay }: any) => (
           <div className="day-container" onClick={() => handleOpenModal(dateOfDay)}>
             <p className="day">{day}</p>
-            <p className="tasks" onClick={handleGoToTasks}>{getAmountOfTasksInThatDate(dateOfDay)} <span>tasks</span></p>
+            <p className="tasks" onClick={() => handleSeeTasksByDate(dateOfDay)}>{getAmountOfTasksInThatDate(dateOfDay)} <span>tasks</span></p>
           </div>
         ))}
       </CalendarContainer>
