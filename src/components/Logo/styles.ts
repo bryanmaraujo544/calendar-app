@@ -15,6 +15,6 @@ export const Container = styled.span`
     font-weight: 700;
     font-size: 1.6rem;
     margin-left: .8rem;
-    color: #001329;
+    color: ${({ theme }) => theme.blue.text};
   }
 `;

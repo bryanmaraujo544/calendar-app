@@ -75,7 +75,7 @@ export const ItemsContainer = styled.div`
       width: 3.2rem;
       height: 3.2rem;
       padding: .5rem;
-      background: #FFEBEB;
+      background: ${({ theme }) => theme.red[100]};
       border-radius: .6rem;
 
       .icon {
@@ -101,6 +101,7 @@ export const Item = styled.div<ItemProps>`
   width: 100%;
   cursor: pointer;
 
+
   .main-container {
     display: flex;
     align-items: center;
@@ -110,7 +111,7 @@ export const Item = styled.div<ItemProps>`
       width: 3.2rem;
       height: 3.2rem;
       padding: .7rem;
-      background: ${({ isActive }) => isActive ? '#1F87FF' : '#E9ECEF' };
+      background: ${({ isActive, theme }) => isActive ? '#1F87FF' : theme.gray[100] };
       border-radius: .7rem;
 
       .icon {
@@ -123,7 +124,7 @@ export const Item = styled.div<ItemProps>`
     .text {
       font-weight: 700;
       font-size: 1.4rem;
-      color: #001329;
+      color: ${({ theme }) => theme.blue.text};
     }
   }
 

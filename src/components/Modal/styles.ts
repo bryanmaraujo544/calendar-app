@@ -9,7 +9,8 @@ export const Overlay = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  background: #00000030;
+  background: ${({ theme }) => theme.shadow.l};
+  backdrop-filter: blur(2px);
   z-index: 9999;
 
 `;
