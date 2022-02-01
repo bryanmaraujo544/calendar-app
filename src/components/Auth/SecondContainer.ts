@@ -18,6 +18,18 @@ export const SecondContainer = styled.section`
     gap: 1.2rem;
     width: 100%;
 
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      span {
+        font-size: 1.2rem;
+        margin-top: .4rem;
+        color: ${({ theme }) => theme.red[200]};
+      }
+    }
+
     input {
       background: ${({ theme }) => theme.gray[100]};
       padding: 0 1.6rem;
