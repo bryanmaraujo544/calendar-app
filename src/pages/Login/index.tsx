@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { setCookie } from 'nookies';
 
 import { MainContainer } from '../../components/Auth/MainContainer';
 import { FirstContainer } from '../../components/Auth/FirstContainer';
 import { SecondContainer } from '../../components/Auth/SecondContainer';
 import RegisterImg from '../../assets/register-img.svg';
 import { useErrors } from '../../hooks/useErrors';
+import { api } from '../../services/api';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const { setError, removeError, errors, getErrorMessageByFieldName } = useErrors();
+  const navigate = useNavigate();
 
 
   function handleChangeEmail(e: any) {
@@ -35,13 +38,26 @@ export const Login = () => {
 
   }
 
-  function handleSubmit(e: any) {
+  async function handleSubmit(e: any) {
     e.preventDefault();
     if (email && password ) {
-      console.log({ email, password });
+      try {
+        const { data } = await api.post('/auth/login', { email, password });
+        const token = data.token;
+        navigate('/');
+        setCookie(null, '@token', token);
+      } catch (err: any) {
+        cleanFields();
+        window.alert('Something is wrong. Try again');
+      }
     } else {
       return window.alert("Don't let any field empty!");
     }
+  }
+
+  function cleanFields() {
+    setEmail('');
+    setPassword('');
   }
 
   return (

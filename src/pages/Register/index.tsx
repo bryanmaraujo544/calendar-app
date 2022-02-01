@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { api } from '../../services/api';
 
 import { MainContainer } from '../../components/Auth/MainContainer';
 import { FirstContainer } from '../../components/Auth/FirstContainer';
@@ -18,6 +19,8 @@ export const Register = () => {
   const [confirmedPassword, setConfirmedPassword] = useState('');
 
   const { setError, removeError, errors, getErrorMessageByFieldName } = useErrors();
+  const navigate = useNavigate();
+
   function handleChangePhotoUrl(e: any) {
     setPhotoUrl(e.target.value);
   }
@@ -54,13 +57,32 @@ export const Register = () => {
     }
   }
 
-  function handleSubmit(e: any) {
+  async function handleSubmit(e: any) {
     e.preventDefault();
+    const passwordsIsEqual = password === confirmedPassword;
+
+    if (!passwordsIsEqual) {
+      return window.alert('Passwords are differents');
+    }
+
     if (email && password && confirmedPassword) {
-      console.log({ photoUrl, email, password, confirmedPassword });
+      try {
+        const { data } = await api.post('/auth/register', { photoUrl, email, password });
+        navigate('/login');
+
+      } catch (err) {
+        cleanFields();
+        window.alert('Something is wrong. Try again.');
+      }
     } else {
       return window.alert("Don't let any field empty!");
     }
+  }
+
+  function cleanFields() {
+    setEmail('');
+    setPassword('');
+    setConfirmedPassword('');
   }
 
   return (
@@ -104,6 +126,7 @@ export const Register = () => {
                 value={password}
                 placeholder="Password..."
                 onChange={(e) => handleChangePassword(e)}
+                type="password"
               />
               {errors.some(({ field }: any) => field === 'password') && (
                 <span>{getErrorMessageByFieldName('password')}</span>
@@ -115,6 +138,7 @@ export const Register = () => {
                 value={confirmedPassword}
                 placeholder="Confirm the password..."
                 onChange={(e) => handleChangeConfirmedPassword(e)}
+                type="password"
               />
               {errors.some(({ field }: any) => field === 'confirmedPassword') && (
                 <span>{getErrorMessageByFieldName('confirmedPassword')}</span>
