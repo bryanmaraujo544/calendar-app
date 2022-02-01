@@ -17,7 +17,7 @@ interface Props {
   eventDate: string
 }
 
-export const Modal = ({
+export const CreateEventModal = ({
   isModalOpen,
   setIsModalOpen,
   eventDate

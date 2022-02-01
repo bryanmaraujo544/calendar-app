@@ -8,6 +8,13 @@ const global = createGlobalStyle`
     outline: none;
     border: none;
     font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   button {
@@ -30,6 +37,10 @@ const global = createGlobalStyle`
 
     @media (max-width: 468px) {
       font-size: 8px;
+    }
+
+    @media (max-width: 340px) {
+      font-size: 7px;
     }
   }
 `;
