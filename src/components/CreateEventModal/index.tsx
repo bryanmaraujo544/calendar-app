@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Overlay, ModalContainer, Form, InputGroup } from './styles';
 import { motion, useAnimation } from 'framer-motion';
-
+import { AxiosError } from 'axios';
 import { overlayVariants } from '../../variants/overlayVariants';
 import { modalVariants } from '../../variants/modalVariants';
 
@@ -10,6 +10,7 @@ import { IoClose } from 'react-icons/io5';
 import { TasksContext } from '../../contexts/TasksContext';
 import { useErrors } from '../../hooks/useErrors';
 import { getFormattedDate } from '../../utils/getFormattedDate';
+import { api } from '../../services/api';
 
 interface Props {
   isModalOpen: boolean,
@@ -68,17 +69,23 @@ export const CreateEventModal = ({
     }
   }
 
-  function handleSubmit(event: any) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
-    const taskAlreadyExistsOnThatDay = tasks.some((task) => task.title === title && task.date === date);
+    // const taskAlreadyExistsOnThatDay = tasks.some((task) => task.title === title && task.date === date);
 
-    if (taskAlreadyExistsOnThatDay) {
-      return window.alert('This event already exists on this date');
-    }
+    // if (taskAlreadyExistsOnThatDay) {
+    //   return window.alert('This event already exists on this date');
+    // }
 
     if (title !== '' && errors.length === 0){
-      setTasks((prevTaks: any) => [...prevTaks, { title, description, date }]);
-      handleCloseModal();
+      try {
+        const { data } = await api.post('/tasks', { title, description, date });
+        setTasks((prevTaks: any) => [...prevTaks, { title, description, date }]);
+        handleCloseModal();
+      } catch (err: any) {
+        const msg = err.response.data.message;
+        window.alert(msg);
+      }
     } else {
       window.alert('Something is wrong :(');
     }
