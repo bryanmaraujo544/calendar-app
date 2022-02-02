@@ -71,16 +71,11 @@ export const CreateEventModal = ({
 
   async function handleSubmit(event: any) {
     event.preventDefault();
-    // const taskAlreadyExistsOnThatDay = tasks.some((task) => task.title === title && task.date === date);
-
-    // if (taskAlreadyExistsOnThatDay) {
-    //   return window.alert('This event already exists on this date');
-    // }
 
     if (title !== '' && errors.length === 0){
       try {
-        const { data } = await api.post('/tasks', { title, description, date });
-        setTasks((prevTaks: any) => [...prevTaks, { title, description, date }]);
+        const { data: { taskCreated } } = await api.post('/tasks', { title, description, date });
+        setTasks((prevTaks: any) => [...prevTaks, { title, description, date, id: taskCreated.id }]);
         handleCloseModal();
       } catch (err: any) {
         const msg = err.response.data.message;

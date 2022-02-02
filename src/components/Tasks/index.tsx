@@ -4,6 +4,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { useContext } from 'react';
 import { TasksContext } from '../../contexts/TasksContext';
 import { HomeContext } from '../../pages/Home';
+import { api } from '../../services/api';
 
 export const Tasks = (props: any) => {
   const { tasks, setTasks } = useContext(TasksContext);
@@ -11,40 +12,41 @@ export const Tasks = (props: any) => {
 
   const filteredTasks = tasks.filter(({ title, description, date }) => title.includes(taskTitle) || description?.includes(taskTitle) || date?.includes(taskTitle) );
 
-  function handleCheckEvent({ title, date }: any) {
+  async function handleCheckEvent({ title, date, id }: any) {
+    const { data } = await api.delete(`/tasks/${id}`);
     setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title || task.date !== date ));
   }
   return (
     <Container>
       <div className="tasks-container">
         {filteredTasks.length > 0 && (
-          filteredTasks.map((task) => (
-            <div className="task-card" key={`${task.title}${task.date}`}>
+          filteredTasks.map(({ title, date, description, id }: any) => (
+            <div className="task-card" key={`${title}${date}`}>
               <div>
-                <p className="title">{task.title}</p>
-                <p className="desc">{task.description}</p>
+                <p className="title">{title}</p>
+                <p className="desc">{description}</p>
 
               </div>
               <div className="date-container">
                 <BsFillCalendarEventFill className="icon" />
-                <p className="date">{task.date}</p>
+                <p className="date">{date}</p>
               </div>
-              <AiFillCheckCircle className="check-icon" onClick={() => handleCheckEvent({ title: task.title, date: task.date })} />
+              <AiFillCheckCircle className="check-icon" onClick={() => handleCheckEvent({ title, date, id })} />
             </div>
           ))
         )}
-        {filteredTasks.length === 0 && tasks.map((task) => (
-          <div className="task-card" key={`${task.title}${task.date}`}>
+        {filteredTasks.length === 0 && tasks.map(({ id, title, description, date }: any) => (
+          <div className="task-card" key={`${title}${date}`}>
             <div>
-              <p className="title">{task.title}</p>
-              <p className="desc">{task.description}</p>
+              <p className="title">{title}</p>
+              <p className="desc">{description}</p>
 
             </div>
             <div className="date-container">
               <BsFillCalendarEventFill className="icon" />
-              <p className="date">{task.date}</p>
+              <p className="date">{date}</p>
             </div>
-            <AiFillCheckCircle className="check-icon" onClick={() => handleCheckEvent({ title: task.title, date: task.date })} />
+            <AiFillCheckCircle className="check-icon" onClick={() => handleCheckEvent({ title, date, id })} />
           </div>
         ))}
       </div>

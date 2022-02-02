@@ -15,10 +15,7 @@ export const AuthContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const { '@token': token } = parseCookies();
-    console.log('authcontext redered');
-    console.log({ token });
     if (token) {
-      console.log(token);
       api.defaults.headers['Authorization'] = `Bearer ${token}`;
     }
   }, []);

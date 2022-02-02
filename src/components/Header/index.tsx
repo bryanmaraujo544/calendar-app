@@ -15,10 +15,6 @@ export const Header = ({
   const { taskTitle, setTaskTitle, setWhichItemIsActive } = useContext(HomeContext);
   const { user } = useContext(AuthContext);
 
-  console.log({ user });
-
-
-
   return (
     <Container>
       <HiMenuAlt2 className="menu-icon" onClick={() => setSideMenuIsOpen(true)}/>
