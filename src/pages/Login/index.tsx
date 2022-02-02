@@ -1,18 +1,18 @@
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { setCookie } from 'nookies';
+import { useErrors } from '../../hooks/useErrors';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import { MainContainer } from '../../components/Auth/MainContainer';
 import { FirstContainer } from '../../components/Auth/FirstContainer';
 import { SecondContainer } from '../../components/Auth/SecondContainer';
 import RegisterImg from '../../assets/register-img.svg';
-import { useErrors } from '../../hooks/useErrors';
-import { api } from '../../services/api';
-import { AuthContext } from '../../contexts/AuthContext';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passIsVisible, setPassIsVisible] = useState(false);
 
   const { setError, removeError, errors, getErrorMessageByFieldName } = useErrors();
   const navigate = useNavigate();
@@ -74,11 +74,19 @@ export const Login = () => {
               )}
             </div>
             <div className="input-group">
-              <input
-                value={password}
-                placeholder="Password..."
-                onChange={handleChangePassword}
-              />
+              <div className="password-input">
+                <input
+                  value={password}
+                  placeholder="Password..."
+                  onChange={handleChangePassword}
+                  type={passIsVisible ? 'text' : 'password'}
+                />
+                {passIsVisible ? (
+                  <AiFillEyeInvisible className="eye-icon" onClick={() => setPassIsVisible(false)} />
+                ) : (
+                  <AiFillEye className="eye-icon" onClick={() => setPassIsVisible(true)} />
+                )}
+              </div>
               {errors.some(({ field }: any) => field === 'password') && (
                 <span>{getErrorMessageByFieldName('password')}</span>
               )}

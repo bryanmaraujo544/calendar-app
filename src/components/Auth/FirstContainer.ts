@@ -7,6 +7,10 @@ export const FirstContainer = styled.section`
   display: flex;
   flex-direction: column;
 
+  @media (min-width: 1380px) {
+    justify-content: center;
+  }
+
   @media (max-width: 468px) {
     padding: 4.8rem 3.2rem;
   }
@@ -19,10 +23,12 @@ export const FirstContainer = styled.section`
     font-size: 4.2rem;
     color: ${({ theme }) => theme.white};
     line-height: 1.3;
+    max-width: 490px;
 
     @media (max-width: 568px) {
       text-align: center;
     }
+
   }
 
   .subtitle {
