@@ -1,13 +1,19 @@
 {
   "name": "calendar-app",
-  "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
-  },
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
+    "-": "^0.0.1",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.2.1",
     "@types/axios": "^0.14.0",
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
+    "D": "^1.0.0",
     "axios": "^0.25.0",
     "framer-motion": "^6.2.3",
     "nookies": "^2.5.2",
@@ -15,7 +21,10 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
-    "styled-components": "^5.3.3"
+    "react-scripts": "5.0.0",
+    "styled-components": "^5.3.3",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
@@ -26,5 +35,29 @@
     "@vitejs/plugin-react": "^1.0.7",
     "typescript": "^4.4.4",
     "vite": "^2.7.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
