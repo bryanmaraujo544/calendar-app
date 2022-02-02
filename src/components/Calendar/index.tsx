@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { Container, CalendarContainer } from "./styles";
 
 import { getDaysInMonth } from "../../utils/getDaysInMonth";
@@ -24,7 +24,7 @@ export const Calendar = (props: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [eventDate, setEventDate] = useState(''); // Date of the square of calendar clicked
 
-  const { firstDayDate, daysInMonth } = getDaysInMonth(date.year, date.month); // This variable grabs how many days the actual month has and the date of the first day of the month
+  const { firstDayDate, daysInMonth } = useMemo(() => getDaysInMonth(date.year, date.month), [date]); // This variable grabs how many days the actual month has and the date of the first day of the month
   const { daysInLastMonth } = getDaysOfPreviousMonth(date.year, date.month); // How many days the previous month has
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export const Calendar = (props: any) => {
     setTaskTitle('');
   }, []);
 
-  function getDaysOfActualMonth() {
+  const getDaysOfActualMonth = useCallback(() => {
     // Here I am pushing all the days of month, for example 1 - 31
     const daysOfActualMonth = [];
     for (let i = 1; i <= daysInMonth; i++){
@@ -46,7 +46,8 @@ export const Calendar = (props: any) => {
     }
 
     return daysOfActualMonth as any;
-  }
+  }, [date]);
+
 
   function getLastDaysOfLastMonth() {
     // This variable grab the first day of the month and returns which day it as of the week

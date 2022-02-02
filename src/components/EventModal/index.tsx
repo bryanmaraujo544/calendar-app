@@ -2,14 +2,12 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Overlay, ModalContainer, Form, InputGroup } from './styles';
 import { motion, useAnimation } from 'framer-motion';
-import { AxiosError } from 'axios';
 import { overlayVariants } from '../../variants/overlayVariants';
 import { modalVariants } from '../../variants/modalVariants';
 
 import { IoClose } from 'react-icons/io5';
 import { TasksContext } from '../../contexts/TasksContext';
 import { useErrors } from '../../hooks/useErrors';
-import { getFormattedDate } from '../../utils/getFormattedDate';
 import { api } from '../../services/api';
 
 interface Props {
@@ -28,7 +26,7 @@ export const EventModal = ({
   taskId
 }: Props) => {
   const overlayControl = useAnimation();
-  const { tasks, setTasks } = useContext(TasksContext);
+  const { setTasks } = useContext(TasksContext);
   const { setError, removeError, getErrorMessageByFieldName, errors } = useErrors();
 
   const [title, setTitle] = useState('');
@@ -39,12 +37,11 @@ export const EventModal = ({
   useEffect(() => {
     if (isModalOpen) {
       overlayControl.start('show');
+      setDate(eventDate); // setting the date input the value of task/calendar-day clicked
     }
-
-    setDate(eventDate);
   }, [isModalOpen]);
 
-  function handleCloseModal() {
+  const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
     setTitle('');
     setDescription('');
@@ -52,7 +49,7 @@ export const EventModal = ({
     removeError('title');
     removeError('description');
     overlayControl.start('hidden');
-  }
+  }, []);
 
   const handleChangeTitle = useCallback((event: any) => {
     setTitle(event.target.value);

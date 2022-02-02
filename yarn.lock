@@ -293,13 +293,6 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
-"@types/nookies@^2.0.3":
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/@types/nookies/-/nookies-2.0.3.tgz#2173e8977a9163defc37fdcc3140a834f21373d1"
-  integrity sha512-+PO/CKwVx7gDG5Pjr+UU/hL6/vFm1ppgW8cilV4AreLEpjbz0wiFvZ5Nld1VIRTr/RiB/KFmiyOzr8GboJfpqg==
-  dependencies:
-    nookies "*"
-
 "@types/prop-types@*":
   version "15.7.4"
   resolved "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.4.tgz"
@@ -742,7 +735,7 @@ node-releases@^2.0.1:
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.1.tgz"
   integrity sha512-CqyzN6z7Q6aMeF/ktcMVTzhAHCEpf8SOarwpzpf8pNBY2k5/oM34UHldUwp8VKI7uxct2HxSRdJjBaZeESzcxA==
 
-nookies@*, nookies@^2.5.2:
+nookies@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/nookies/-/nookies-2.5.2.tgz#cc55547efa982d013a21475bd0db0c02c1b35b27"
   integrity sha512-x0TRSaosAEonNKyCrShoUaJ5rrT5KHRNZ5DwPCuizjgrnkpE5DRf3VL7AyyQin4htict92X1EQ7ejDbaHDVdYA==
