@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const FirstContainer = styled.section`
-  background: ${({ theme }) => theme.blue.main[200]};
+  background: #1F87FF;
   padding: 6.4rem;
   overflow: hidden;
   display: flex;
@@ -21,7 +21,7 @@ export const FirstContainer = styled.section`
 
   .title {
     font-size: 4.2rem;
-    color: ${({ theme }) => theme.white};
+    color: #fff;
     line-height: 1.3;
     max-width: 490px;
 
@@ -32,13 +32,13 @@ export const FirstContainer = styled.section`
   }
 
   .subtitle {
-    color: ${({ theme }) => theme.gray[300]};
+    color: #CED4DA;
     font-weight: 500;
     margin-top: .4rem;
     font-size: 1.6rem;
 
     a {
-      color: ${({ theme }) => theme.blue.text};
+      color: #001329;
       font-weight: 700;
     }
   }

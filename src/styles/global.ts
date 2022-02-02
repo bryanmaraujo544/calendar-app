@@ -9,6 +9,10 @@ const global = createGlobalStyle`
     border: none;
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
+
+    transition-property: background, color;
+    transition-duration: .2s;
+    transition-timing-function: ease-out;
   }
 
   a {

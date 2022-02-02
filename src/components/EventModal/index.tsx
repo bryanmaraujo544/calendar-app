@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Overlay, ModalContainer, Form, InputGroup } from './styles';
 import { motion, useAnimation } from 'framer-motion';
@@ -15,13 +15,17 @@ import { api } from '../../services/api';
 interface Props {
   isModalOpen: boolean,
   setIsModalOpen: any,
-  eventDate: string
+  eventDate: string,
+  isToEditEvent?: boolean,
+  taskId?: string
 }
 
-export const CreateEventModal = ({
+export const EventModal = ({
   isModalOpen,
   setIsModalOpen,
-  eventDate
+  eventDate,
+  isToEditEvent,
+  taskId
 }: Props) => {
   const overlayControl = useAnimation();
   const { tasks, setTasks } = useContext(TasksContext);
@@ -29,16 +33,15 @@ export const CreateEventModal = ({
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(''); // State that storage the date of the event
 
-  const dateFormatted = getFormattedDate(eventDate);
 
   useEffect(() => {
     if (isModalOpen) {
       overlayControl.start('show');
     }
 
-    setDate(dateFormatted);
+    setDate(eventDate);
   }, [isModalOpen]);
 
   function handleCloseModal() {
@@ -51,14 +54,14 @@ export const CreateEventModal = ({
     overlayControl.start('hidden');
   }
 
-  function handleChangeTitle(event: any) {
+  const handleChangeTitle = useCallback((event: any) => {
     setTitle(event.target.value);
     if (!event.target.value) {
       setError({ field: 'title', message: "title can't be empty"  });
     } else {
       removeError('title');
     }
-  }
+  }, []);
 
   function handleChangeDescription(event: any) {
     setDescription(event.target.value);
@@ -71,20 +74,42 @@ export const CreateEventModal = ({
 
   async function handleSubmit(event: any) {
     event.preventDefault();
-
     if (title !== '' && errors.length === 0){
       try {
-        const { data: { taskCreated } } = await api.post('/tasks', { title, description, date });
-        setTasks((prevTaks: any) => [...prevTaks, { title, description, date, id: taskCreated.id }]);
-        handleCloseModal();
+        if (isToEditEvent) {
+          await updateEvent();
+          handleCloseModal();
+        } else {
+          await createEvent()
+          handleCloseModal();
+        }
       } catch (err: any) {
-        const msg = err.response.data.message;
-        window.alert(msg);
+        const msg = err.response.data?.message;
+        window.alert(msg || 'Something is wrong;');
       }
     } else {
       window.alert('Something is wrong :(');
     }
   }
+
+  const createEvent = useCallback(async () => {
+    const { data: { taskCreated } } = await api.post('/tasks', { title, description, date });
+    setTasks((prevTaks: any) => [...prevTaks, { title, description, date, id: taskCreated.id }]);
+
+  }, [title, description, date]);
+
+  const updateEvent = useCallback(async () => {
+    const { data: { taskUpdated } } = await api.put(`/tasks/${taskId}`, { title, description, date });
+    setTasks((prevTasks: any) => (
+      prevTasks.map((task: any) => {
+        if (task.id === taskUpdated.id) {
+          return taskUpdated;
+        }
+        return task;
+      })
+    ));
+
+  }, [title, description, date]);
 
   return ReactDOM.createPortal(
     <Overlay

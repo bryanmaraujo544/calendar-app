@@ -26,25 +26,25 @@ export const SecondContainer = styled.section`
       span {
         font-size: 1.2rem;
         margin-top: .4rem;
-        color: ${({ theme }) => theme.red[200]};
+        color: #FF1F1F;
       }
     }
 
     input {
       position: relative;
-      background: ${({ theme }) => theme.gray[100]};
+      background: #E9ECEF;
       padding: 0 1.6rem;
       height: 5.6rem;
       width: 100%;
-      box-shadow: 0 2px 4px ${({ theme }) => theme.shadow.sm};
+      box-shadow: 0 2px 4px #00000010;
       border-radius: 1rem;
 
       font-size: 1.4rem;
       font-weight: 700;
-      color: ${({ theme }) => theme.gray[500]};
+      color: #6C757D;
 
       &::placeholder {
-        color: ${({ theme }) => theme.gray[400]};
+        color: #ADB5BD;
         font-weight: 700;
       }
     }
@@ -52,11 +52,11 @@ export const SecondContainer = styled.section`
     .password-input {
       display: flex;
       align-items: center;
-      background: ${({ theme }) => theme.gray[100]};
+      background: #E9ECEF;
       padding: 0 1.6rem;
       height: 5.6rem;
       width: 100%;
-      box-shadow: 0 2px 4px ${({ theme }) => theme.shadow.sm};
+      box-shadow: 0 2px 4px #00000010;
       border-radius: 1rem;
 
       input {
@@ -66,7 +66,7 @@ export const SecondContainer = styled.section`
 
       .eye-icon {
         font-size: 2.2rem;
-        color: ${({ theme }) => theme.gray[500]};
+        color: #6C757D;
         cursor: pointer;
         transition: all .2s ease;
 
@@ -81,20 +81,20 @@ export const SecondContainer = styled.section`
     button[type=submit] {
       margin-top: .8rem;
       height: 4.8rem;
-      background: ${({ theme }) => theme.blue.main[200]};
+      background: #1F87FF;
       font-size: 1.8rem;
       letter-spacing: 0.75px;
       font-weight: 700;
       color: #fff;
       border-radius: 1rem;
-      box-shadow: 0 1px 8px ${({ theme }) => theme.blue.main[100]};
+      box-shadow: 0 1px 8px #479DFF;
       transition: background .2s ease-in;
 
       &:hover {
-        background: ${({ theme }) => theme.blue.main[300]};
+        background: #0072F5;
       }
       &:active {
-        background: ${({ theme }) => theme.blue.main[100]};
+        background: #479DFF;
       }
     }
 
@@ -113,13 +113,13 @@ export const SecondContainer = styled.section`
 
         p {
           font-size: 1.2rem;
-          color: ${({ theme }) => theme.gray[400]};
+          color: #ADB5BD;
         }
 
         .line {
           width: 2px;
           flex: 1;
-          background: ${({ theme }) => theme.gray[400]};
+          background: #ADB5BD;
         }
       }
 
@@ -127,14 +127,14 @@ export const SecondContainer = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
-        background: ${({ theme }) => theme.gray[400]};
+        background: #ADB5BD;
         color: #fff;
         height: 100%;
         aspect-ratio: 1 / 1;
         border-radius: 1rem;
         transition: background .2s ease;
         &:hover {
-          background: ${({ theme }) => theme.gray[500]};
+          background: #6C757D;
         }
 
         .icon {
@@ -146,13 +146,13 @@ export const SecondContainer = styled.section`
   }
 
   .subtitle {
-    color: ${({ theme }) => theme.gray[500]};
+    color: #6C757D;
     font-size: 1.5rem;
     margin-top: 1.6rem;
     font-weight: 500;
 
     a {
-      color: ${({ theme }) => theme.blue.main[300]};
+      color: #0072F5;
       font-weight: 700;
     }
   }

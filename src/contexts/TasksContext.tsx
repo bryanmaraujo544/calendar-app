@@ -23,6 +23,7 @@ export const TasksProvider = ({ children }: Props) => {
   const { '@token': token } = parseCookies();
 
   const [tasks, setTasks] = useState([]);
+  console.log('Tasks', tasks);
 
   useEffect(() => {
     (async () => {

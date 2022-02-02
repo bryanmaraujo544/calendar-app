@@ -3,7 +3,7 @@ import { Container, CalendarContainer } from "./styles";
 
 import { getDaysInMonth } from "../../utils/getDaysInMonth";
 import { getDaysOfPreviousMonth } from "../../utils/getDaysOfPreviousMonth";
-import { CreateEventModal } from '../CreateEventModal';
+import { EventModal } from '../EventModal';
 import { TasksContext } from '../../contexts/TasksContext';
 import { getFormattedDate } from '../../utils/getFormattedDate';
 import { useNavigate } from 'react-router-dom';
@@ -72,7 +72,7 @@ export const Calendar = (props: any) => {
   }
 
   function handleOpenModal(dt: string) {
-    setEventDate(dt);
+    setEventDate(getFormattedDate(dt));
     setIsModalOpen(true);
   }
 
@@ -104,7 +104,7 @@ export const Calendar = (props: any) => {
           </div>
         ))}
       </CalendarContainer>
-      <CreateEventModal
+      <EventModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         eventDate={eventDate}
