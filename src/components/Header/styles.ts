@@ -28,11 +28,13 @@ export const Container = styled.div`
     border-radius: 1rem;
     background: ${({ theme }) => theme.gray[300]};
     box-shadow: 0 3px 3px ${({ theme }) => theme.shadow.sm};
+    overflow: hidden;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+
     }
   }
 `;

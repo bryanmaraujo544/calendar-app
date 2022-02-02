@@ -15,6 +15,7 @@ import { overlayVariants } from '../../variants/overlayVariants';
 import { modalVariants } from '../../variants/modalVariants';
 import { sideMenuVariants } from '../../variants/sideMenuVariants';
 import { HomeContext } from '../../pages/Home';
+import { destroyCookie } from 'nookies';
 
 interface Props {
   setTheme: any,
@@ -57,6 +58,11 @@ export const SideMenu = ({
   function handleCloseSideMenu() {
     setSideMenuIsOpen(false);
     sideMenuControl.start('hidden');
+  }
+
+  function handleLogout() {
+    destroyCookie(null, '@token');
+    navigate('/login');
   }
 
   return (
@@ -118,7 +124,7 @@ export const SideMenu = ({
               </motion.div>
             </Item>
           </div>
-          <div className="logout">
+          <div className="logout" onClick={handleLogout}>
             <div className="icon-container">
               <IoLogOut className="icon" />
 

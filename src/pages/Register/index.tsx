@@ -68,7 +68,9 @@ export const Register = () => {
     }
 
     if (email && password && confirmedPassword) {
-      await register({ photoUrl, email, password })
+      const defaultImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Breezeicons-actions-22-im-user.svg/768px-Breezeicons-actions-22-im-user.svg.png';
+
+      await register({ photoUrl: photoUrl === '' ? defaultImage : photoUrl, email, password })
     } else {
       return window.alert("Don't let any field empty!");
     }

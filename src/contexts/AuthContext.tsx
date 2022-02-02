@@ -10,7 +10,9 @@ interface Props {
 export const AuthContext = createContext({} as any);
 
 export const AuthContextProvider = ({ children }: Props) => {
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
+
   useEffect(() => {
     const { '@token': token } = parseCookies();
     console.log('authcontext redered');
@@ -50,7 +52,7 @@ export const AuthContextProvider = ({ children }: Props) => {
   }
 
   return (
-    <AuthContext.Provider value={{ register, login, }}>
+    <AuthContext.Provider value={{ register, login, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
