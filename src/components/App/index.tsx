@@ -10,6 +10,7 @@ import { Tasks } from '../Tasks';
 import { ThemeProvider } from 'styled-components';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { theme } from '../../styles/theme';
+import { AuthContextProvider } from '../../contexts/AuthContext';
 
 function App() {
   const [themeMode, setThemeMode] = useLocalStorage('theme', 'light');
@@ -19,16 +20,17 @@ function App() {
       <Container>
         <GlobaStyles />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home setTheme={setThemeMode} />}>
-              <Route index element={<Calendar />} />
-
-              <Route path="calendar" element={<Calendar />} />
-              <Route path="tasks" element={<Tasks />} />
-            </Route>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Routes>
+          <AuthContextProvider>
+            <Routes>
+              <Route path="/" element={<Home setTheme={setThemeMode} />}>
+                <Route index element={<Calendar />} />
+                <Route path="calendar" element={<Calendar />} />
+                <Route path="tasks" element={<Tasks />} />
+              </Route>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+          </AuthContextProvider>
         </BrowserRouter>
       </Container>
     </ThemeProvider>

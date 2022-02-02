@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { api } from '../../services/api';
 
@@ -10,6 +10,7 @@ import { ChooseProfileImgModal } from '../../components/ChooseProfileImgModal';
 import { BsPlusLg } from 'react-icons/bs';
 import RegisterImg from '../../assets/register-img.svg';
 import { useErrors } from '../../hooks/useErrors';
+import { AuthContext } from '../../contexts/AuthContext';
 
 export const Register = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,6 +21,7 @@ export const Register = () => {
 
   const { setError, removeError, errors, getErrorMessageByFieldName } = useErrors();
   const navigate = useNavigate();
+  const { register } = useContext(AuthContext);
 
   function handleChangePhotoUrl(e: any) {
     setPhotoUrl(e.target.value);
@@ -66,14 +68,7 @@ export const Register = () => {
     }
 
     if (email && password && confirmedPassword) {
-      try {
-        const { data } = await api.post('/auth/register', { photoUrl, email, password });
-        navigate('/login');
-
-      } catch (err) {
-        cleanFields();
-        window.alert('Something is wrong. Try again.');
-      }
+      await register({ photoUrl, email, password })
     } else {
       return window.alert("Don't let any field empty!");
     }

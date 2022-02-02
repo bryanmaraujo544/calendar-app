@@ -1,10 +1,12 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Container, RightSection } from './styles';
 import { SideMenu } from '../../components/SideMenu';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { Header } from '../../components/Header';
 import { TasksProvider } from '../../contexts/TasksContext';
+import { api } from '../../services/api';
+import { parseCookies } from 'nookies';
 
 interface CtxProps {
   taskTitle: string,
@@ -25,6 +27,24 @@ export const Home = ({ setTheme }: any) => {
     }
     return 'tasks';
   });
+
+  const { '@token': token } = parseCookies();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      if (!token) {
+        return navigate('/login');
+      }
+
+      api.defaults.headers['Authorization'] = `Bearer ${token}`;
+      const { data } = await api.get('/auth');
+      console.log(data);
+      if (!data.auth) {
+        navigate('/login');
+      }
+    })();
+  }, []);
 
   return (
     <TasksProvider>
