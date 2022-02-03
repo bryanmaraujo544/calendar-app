@@ -6,13 +6,11 @@ import { api } from "../services/api";
 interface Props {
   children: ReactNode
 }
-
 interface Task {
   title: string,
   description?: string,
   date?:string
 }
-
 interface TaskProps {
   tasks: Task[],
   setTasks: any
@@ -22,9 +20,7 @@ export const TasksContext = createContext({} as TaskProps);
 
 export const TasksProvider = ({ children }: Props) => {
   const { '@token': token } = parseCookies();
-
   const [tasks, setTasks] = useState([]);
-  console.log('Tasks', tasks);
 
   useEffect(() => {
     (async () => {

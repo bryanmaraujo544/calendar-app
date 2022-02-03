@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState, useCallback, useMemo } from 'react';
-import { Container, CalendarContainer } from "./styles";
+import { Container, CalendarContainer, DayContainer } from "./styles";
 
 import { getDaysInMonth } from "../../utils/getDaysInMonth";
 import { getDaysOfPreviousMonth } from "../../utils/getDaysOfPreviousMonth";
@@ -23,7 +23,6 @@ export const Calendar = (props: any) => {
   
   const navigate = useNavigate();
   const { tasks } = useContext(TasksContext);
-  console.log({ tasks });
   const { setWhichItemIsActive, setTaskTitle } = useContext(HomeContext);
 
   const { firstDayDate, daysInMonth } = useMemo(() => getDaysInMonth(date.year, date.month), [date]); // This variable grabs how many days the actual month has and the date of the first day of the month
@@ -69,13 +68,12 @@ export const Calendar = (props: any) => {
   }
 
   function getAmountOfTasksInThatDate(dt: string) {
-    const formattedDate = getFormattedDate(dt); // 2022-04-39
-    const tasksOnDate: any = tasks.filter((task: any) => task.date === formattedDate);
+    const tasksOnDate: any = tasks.filter((task: any) => task.date === dt);
     return tasksOnDate.length;
   }
 
   function handleOpenModal(dt: string) {
-    setEventDate(getFormattedDate(dt));
+    setEventDate(dt);
     setIsModalOpen(true);
   }
 
@@ -95,16 +93,16 @@ export const Calendar = (props: any) => {
       />
       <CalendarContainer>
         {lastDaysOfLastMonth.map((day) => (
-          <div className="day-container last-month">
+          <DayContainer isLastMonth>
             <p className="day">{day}</p>
             <p className="tasks">- <span>tasks</span></p>
-          </div>
+          </DayContainer>
         ))}
         {daysOfActualMonth.map(({ day, dateOfDay }: any) => (
-          <div className="day-container" onClick={() => handleOpenModal(dateOfDay)}>
+          <DayContainer  hasTasks={getAmountOfTasksInThatDate(dateOfDay)} onClick={() => handleOpenModal(dateOfDay)}>
             <p className="day">{day}</p>
             <p className="tasks" onClick={() => handleSeeTasksByDate(dateOfDay)}>{getAmountOfTasksInThatDate(dateOfDay)} <span>tasks</span></p>
-          </div>
+          </DayContainer>
         ))}
       </CalendarContainer>
       <EventModal

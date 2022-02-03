@@ -17,7 +17,6 @@ export const Container = styled.header`
 
   .date-container {
     display: flex;
-    width: 100%;
     justify-content: center;
     align-items: center;
     gap: 3.2rem;
@@ -31,6 +30,7 @@ export const Container = styled.header`
     }
 
     .btn-container {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -59,6 +59,29 @@ export const Container = styled.header`
       .icon.second {
         transform: rotate(90deg);
       }
+
+      .ball {
+        position: absolute;
+        width: .8rem;
+        height: .8rem;
+        border-radius: 50%;
+        background: ${({ theme }) => theme.blue.main[100]};
+        box-shadow: 0 0 .8rem ${({ theme }) => theme.blue.main[100]};
+  
+        &:nth-child(1) {
+          margin-right: -1.6rem;
+          background: green;
+        }
+
+        &.right {
+          right: -2.4rem;
+        }
+        
+        &.left {
+          left: -2.4rem;
+        }
+    
+      }
     }
 
     .date {
@@ -67,6 +90,7 @@ export const Container = styled.header`
       color: ${({ theme }) => theme.blue.text};
       text-align: center;
     }
+
   }
 
   .week-container {

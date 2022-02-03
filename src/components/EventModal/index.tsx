@@ -9,6 +9,7 @@ import { IoClose } from 'react-icons/io5';
 import { TasksContext } from '../../contexts/TasksContext';
 import { useErrors } from '../../hooks/useErrors';
 import { api } from '../../services/api';
+import { getFormattedDate } from '../../utils/getFormattedDate';
 
 interface Props {
   isModalOpen: boolean,
@@ -31,13 +32,15 @@ export const EventModal = ({
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [date, setDate] = useState(''); // State that storage the date of the event
-
+  const [inputDate, setDate] = useState(''); // State that storage the date of the event
 
   useEffect(() => {
     if (isModalOpen) {
       overlayControl.start('show');
-      setDate(eventDate); // setting the date input the value of task/calendar-day clicked
+
+      // setting the date input the value of task/calendar-day clicked
+      // Formating the date for the input shows the correct date
+      setDate(getFormattedDate(eventDate)); 
     }
   }, [isModalOpen]);
 
@@ -90,13 +93,13 @@ export const EventModal = ({
   }
 
   const createEvent = useCallback(async () => {
-    const { data: { taskCreated } } = await api.post('/tasks', { title, description, date });
-    setTasks((prevTaks: any) => [...prevTaks, { title, description, date, id: taskCreated.id }]);
+    const { data: { taskCreated } } = await api.post('/tasks', { title, description, date: eventDate });
+    setTasks((prevTaks: any) => [...prevTaks, { title, description, date: eventDate, id: taskCreated.id }]);
 
-  }, [title, description, date]);
+  }, [title, description, inputDate]);
 
   const updateEvent = useCallback(async () => {
-    const { data: { taskUpdated } } = await api.put(`/tasks/${taskId}`, { title, description, date });
+    const { data: { taskUpdated } } = await api.put(`/tasks/${taskId}`, { title, description, date: eventDate });
     setTasks((prevTasks: any) => (
       prevTasks.map((task: any) => {
         if (task.id === taskUpdated.id) {
@@ -106,7 +109,7 @@ export const EventModal = ({
       })
     ));
 
-  }, [title, description, date]);
+  }, [title, description, inputDate]);
 
   return ReactDOM.createPortal(
     <Overlay
@@ -136,7 +139,7 @@ export const EventModal = ({
             )}
           </InputGroup>
           <InputGroup>
-            <input value={date} type="date" onChange={(e) => setDate(e.target.value)} />
+            <input value={inputDate} type="date" onChange={(e) => setDate(e.target.value)} />
           </InputGroup>
           <button type="submit">Create</button>
         </Form>

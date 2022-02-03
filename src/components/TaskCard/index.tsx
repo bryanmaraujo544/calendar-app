@@ -8,9 +8,9 @@ import { BsFillCalendarEventFill } from 'react-icons/bs';
 import { MdModeEdit } from 'react-icons/md';
 import { EventModal } from '../EventModal';
 import { motion } from 'framer-motion';
+import { getFormattedDate } from '../../utils/getFormattedDate';
 
 export const TaskCard = ({ title, date, description, id }: any) => {
-  console.log({ date });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { setTasks } = useContext(TasksContext);
 
@@ -39,7 +39,7 @@ export const TaskCard = ({ title, date, description, id }: any) => {
           </div>
           <div className="date-container">
             <BsFillCalendarEventFill className="icon" />
-            <p className="date">{date}</p>
+            <p className="date">{getFormattedDate(date)}</p>
           </div>
         </div>
         <div className="icons-container">
