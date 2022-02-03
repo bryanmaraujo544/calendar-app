@@ -145,4 +145,17 @@ export const Item = styled.div<ItemProps>`
       border-radius: 999px;
     }
   }
+
+  .tasks-amount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${({ theme }) => theme.red[200]};
+    height: 100%;
+    border-radius: 1rem;
+    aspect-ratio: 1 / 1;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: ${({ theme }) => theme.white};
+  }
 `;

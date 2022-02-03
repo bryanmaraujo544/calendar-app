@@ -16,6 +16,7 @@ import { overlayVariants } from '../../variants/overlayVariants';
 import { sideMenuVariants } from '../../variants/sideMenuVariants';
 import { HomeContext } from '../../pages/Home';
 import { destroyCookie } from 'nookies';
+import { TasksContext } from '../../contexts/TasksContext';
 
 interface Props {
   setTheme: any,
@@ -30,8 +31,9 @@ export const SideMenu = ({
 }: Props) => {
   const navigate = useNavigate();
   const sideMenuControl = useAnimation();
-  const theme = useContext(ThemeContext);
 
+  const theme = useContext(ThemeContext);
+  const { tasks } = useContext(TasksContext);
   // This states is in Home components, because them need to be accessed by the calendar components and the search component
   const { whichItemIsActive, setWhichItemIsActive } = useContext(HomeContext);
 
@@ -103,6 +105,9 @@ export const SideMenu = ({
                   <BsFillCheckSquareFill className="icon" />
                 </div>
                 <p className="text">Tasks</p>
+              </div>
+              <div className="tasks-amount">
+                <p>{tasks.length}</p>
               </div>
             </Item>
             <Item>
