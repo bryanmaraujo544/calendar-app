@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom'
 import { useAnimation, motion } from 'framer-motion';
 import { Overlay, ModalContainer } from './styles';
@@ -6,6 +7,8 @@ import { Overlay, ModalContainer } from './styles';
 import { overlayVariants } from '../../variants/overlayVariants';
 import { modalVariants } from '../../variants/modalVariants';
 import { IoClose } from 'react-icons/io5';
+import { api } from '../../services/api';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const photos = [
   'https://i.pinimg.com/564x/fd/4c/c1/fd4cc10a0b9a1b1bcf3f6c0fca1673e6.jpg',
@@ -26,14 +29,17 @@ const photos = [
 interface Props {
   isModalOpen: boolean,
   setIsModalOpen: any,
-  setPhotoUrl: any
+  setPhotoUrl: any,
+  isToUpdateProfilePhoto?: boolean
 }
 
 export const ChooseProfileImgModal = ({
   isModalOpen,
   setIsModalOpen,
-  setPhotoUrl
+  setPhotoUrl,
+  isToUpdateProfilePhoto
 }: Props) => {
+  const { setUser } = useContext(AuthContext);
   const overlayControl = useAnimation();
 
   useEffect(() => {
@@ -47,9 +53,24 @@ export const ChooseProfileImgModal = ({
     overlayControl.start('hidden');
   }
 
-  function handleChoosePhoto(url: string) {
-    setPhotoUrl(url);
-    handleCloseModal();
+  async function handleChoosePhoto(url: string) {
+    if (isToUpdateProfilePhoto) {
+      await updateProfilePhoto(url);
+      handleCloseModal();
+    } else {
+      setPhotoUrl(url);
+      handleCloseModal();
+    }
+  }
+
+  async function updateProfilePhoto(photoUrl: string) {
+    try {
+      const { data } = await api.put('/users', { photoUrl });
+      const { id, profile_image } = data.userUpdated;
+      setUser({ id, profile_image }); // Setting the user to don't need to reload the page
+    } catch (err: any) {
+      console.log(err?.response);
+    }
   }
 
   return ReactDOM.createPortal(
