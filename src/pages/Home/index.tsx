@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Container, RightSection } from './styles';
 import { SideMenu } from '../../components/SideMenu';

@@ -4,21 +4,15 @@ import { TasksContext } from '../../contexts/TasksContext';
 import { HomeContext } from '../../pages/Home';
 import { api } from '../../services/api';
 
-import { AiFillCheckCircle } from 'react-icons/ai';
-import { BsFillCalendarEventFill } from 'react-icons/bs';
 import { BiTaskX } from 'react-icons/bi';
 import { TaskCard } from '../TaskCard';
 
 export const Tasks = (props: any) => {
-  const { tasks, setTasks } = useContext(TasksContext);
+  const { tasks } = useContext(TasksContext);
   const { taskTitle } = useContext(HomeContext);
 
   const filteredTasks = tasks.filter(({ title, description, date }) => title.includes(taskTitle) || description?.includes(taskTitle) || date?.includes(taskTitle) );
 
-  async function handleCheckEvent({ title, date, id }: any) {
-    const { data } = await api.delete(`/tasks/${id}`);
-    setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title || task.date !== date ));
-  }
   return (
     <Container>
       <div className="tasks-container">

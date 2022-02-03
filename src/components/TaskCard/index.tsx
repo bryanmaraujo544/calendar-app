@@ -11,10 +11,10 @@ import { EventModal } from '../EventModal';
 export const TaskCard = ({ title, date, description, id }: any) => {
   console.log({ date });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { tasks, setTasks } = useContext(TasksContext);
+  const { setTasks } = useContext(TasksContext);
 
   async function handleCheckEvent({ title, date, id }: any) {
-    const { data } = await api.delete(`/tasks/${id}`);
+    await api.delete(`/tasks/${id}`);
     setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title || task.date !== date ));
   }
 

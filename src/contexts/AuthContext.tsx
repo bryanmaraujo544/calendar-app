@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }: Props) => {
     password
   }: { photoUrl: string, email: string, password: string }) {
     try {
-      const { data } = await api.post('/auth/register', { photoUrl, email, password });
+      await api.post('/auth/register', { photoUrl, email, password });
       navigate('/login');
     } catch (err) {
       window.alert('Something is wrong. Try again.');

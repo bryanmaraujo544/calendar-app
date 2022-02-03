@@ -1,4 +1,5 @@
-import { useContext, useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useEffect } from 'react';
 import { Container, ItemsContainer, Item, Overlay } from './styles';
 import { motion, useAnimation } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +13,6 @@ import { BsFillCalendarFill, BsFillCheckSquareFill, BsMoonFill } from 'react-ico
 
 import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 import { overlayVariants } from '../../variants/overlayVariants';
-import { modalVariants } from '../../variants/modalVariants';
 import { sideMenuVariants } from '../../variants/sideMenuVariants';
 import { HomeContext } from '../../pages/Home';
 import { destroyCookie } from 'nookies';

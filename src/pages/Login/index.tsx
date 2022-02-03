@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useErrors } from '../../hooks/useErrors';
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -8,6 +8,7 @@ import { FirstContainer } from '../../components/Auth/FirstContainer';
 import { SecondContainer } from '../../components/Auth/SecondContainer';
 import RegisterImg from '../../assets/register-img.svg';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import isEmailValid from '../../utils/isEmailValid';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -15,17 +16,26 @@ export const Login = () => {
   const [passIsVisible, setPassIsVisible] = useState(false);
 
   const { setError, removeError, errors, getErrorMessageByFieldName } = useErrors();
-  const navigate = useNavigate();
   const { login } = useContext(AuthContext);
-
 
   function handleChangeEmail(e: any) {
     setEmail(e.target.value);
 
+    // Is the input is empty say that email is required
     if (!e.target.value) {
-      setError({ field: 'email', message: 'Email is required' })
+      removeError({ field: 'email', message: 'Invalid email' });
+      setError({ field: 'email', message: 'Email is required' });
     } else {
-      removeError('email');
+      // When the input it isn't empty anymore, remove the above error
+      removeError({ field: 'email', message: 'Email is required' });
+
+      // When the input it isn't empty but the email is invalid, set the below error
+      if (!isEmailValid(e.target.value)) {
+        setError({ field: 'email', message: 'Invalid email' });
+      } else {
+        // When the input it is not empty but the email it is alreavy valid, remove the above error
+        removeError({ field: 'email', message: 'Invalid email' });
+      }
     }
   }
 
@@ -35,7 +45,7 @@ export const Login = () => {
     if (!e.target.value) {
       setError({ field: 'password', message: 'Password is required' })
     } else {
-      removeError('password');
+      removeError({ field: 'password', message: 'Password is required' });
     }
 
   }

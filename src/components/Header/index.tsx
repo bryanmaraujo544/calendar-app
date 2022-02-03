@@ -11,8 +11,6 @@ interface Props {
 export const Header = ({
   setSideMenuIsOpen
 }: Props) => {
-
-  const { taskTitle, setTaskTitle, setWhichItemIsActive } = useContext(HomeContext);
   const { user } = useContext(AuthContext);
 
   return (

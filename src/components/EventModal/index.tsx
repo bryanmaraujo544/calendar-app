@@ -46,17 +46,17 @@ export const EventModal = ({
     setTitle('');
     setDescription('');
     setDate('');
-    removeError('title');
-    removeError('description');
+    removeError({ field: 'title', message: "title can't be empty" });
+    removeError({ field:  'description', message: 'Description is too long'});
     overlayControl.start('hidden');
   }, []);
 
   const handleChangeTitle = useCallback((event: any) => {
     setTitle(event.target.value);
     if (!event.target.value) {
-      setError({ field: 'title', message: "title can't be empty"  });
+      setError({ field: 'title', message: "Title can't be empty"  });
     } else {
-      removeError('title');
+      removeError({ field: 'title', message: "title can't be empty" });
     }
   }, []);
 
@@ -65,7 +65,7 @@ export const EventModal = ({
     if (event.target.value.length === 72) {
       setError({ field: 'description', message: "Description is too long"  });
     } else {
-      removeError('description');
+      removeError({ field:  'description', message: 'Description is too long'});
     }
   }
 

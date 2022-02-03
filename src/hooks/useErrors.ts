@@ -7,16 +7,17 @@ interface ErrorProps {
 
 interface UseErrorsProps {
   setError({ field, message }: ErrorProps): void,
-  removeError(fieldName: string): void,
+  removeError({ field, message }: ErrorProps): void,
   getErrorMessageByFieldName(fieldName: string): string,
   errors: any
 }
 
 export const useErrors = () => {
   const [errors, setErrors] = useState([] as any);
+  console.log({ errors });
 
   function setError({ field, message }: ErrorProps) {
-    const errorAlreadyExists = errors.find((error: ErrorProps) => error.field === field);
+    const errorAlreadyExists = errors.find((error: ErrorProps) => error.field === field && error.message === message);
 
     if (errorAlreadyExists) return;
 
@@ -26,9 +27,9 @@ export const useErrors = () => {
     ]);
   };
 
-  function removeError(fieldName: string) {
+  function removeError({ field, message }: ErrorProps) {
     setErrors((prevErrors: ErrorProps[]) => prevErrors.filter(
-      (error: ErrorProps) => error.field !== fieldName
+      (error: ErrorProps) => error.field !== field || error.message !== message
     ));
   }
 
