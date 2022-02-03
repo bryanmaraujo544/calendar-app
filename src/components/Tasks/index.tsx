@@ -1,13 +1,13 @@
 import { Container } from './styles';
 import { useContext } from 'react';
+import { motion } from 'framer-motion';
 import { TasksContext } from '../../contexts/TasksContext';
 import { HomeContext } from '../../pages/Home';
-import { api } from '../../services/api';
 
 import { BiTaskX } from 'react-icons/bi';
 import { TaskCard } from '../TaskCard';
 
-export const Tasks = (props: any) => {
+export const Tasks = () => {
   const { tasks } = useContext(TasksContext);
   const { taskTitle } = useContext(HomeContext);
 
@@ -15,7 +15,7 @@ export const Tasks = (props: any) => {
 
   return (
     <Container>
-      <div className="tasks-container">
+      <motion.div layout className="tasks-container">
         {filteredTasks.length > 0 && (
           filteredTasks.map(({ title, date, description, id }: any) => (
             <TaskCard
@@ -34,7 +34,7 @@ export const Tasks = (props: any) => {
             id={id}
           />
         ))}
-      </div>
+      </motion.div>
       {tasks.length === 0 && (
         <div className="alert-container">
           <p className="alert-title"> There is no tasks </p>

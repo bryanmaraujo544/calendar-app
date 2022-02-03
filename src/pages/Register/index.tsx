@@ -1,18 +1,24 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import { MainContainer } from '../../components/Auth/MainContainer';
 import { FirstContainer } from '../../components/Auth/FirstContainer';
 import { SecondContainer } from '../../components/Auth/SecondContainer';
 import { ChooseProfileImgModal } from '../../components/ChooseProfileImgModal';
-import RegisterImg from '../../assets/register-img.svg';
+
 import { useErrors } from '../../hooks/useErrors';
 import { AuthContext } from '../../contexts/AuthContext';
 import isEmailValid from '../../utils/isEmailValid';
 import { isPasswordValid } from '../../utils/isPasswordValid';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { propagationContainerVariants } from '../../variants/propagationContainerVariants';
+import { propagationItemVariants } from '../../variants/propagationItemVariants';
 
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import RegisterImg from '../../assets/register-img.svg';
 import { BsPlusLg } from 'react-icons/bs';
+
+
 export const Register = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [photoUrl, setPhotoUrl] = useState('');
@@ -93,76 +99,91 @@ export const Register = () => {
     }
   }
 
+  const animationProps = {
+    variants: propagationItemVariants,
+    transition: { type: "spring", mass: 1, stiffness: 175 }
+  }
+
   return (
     <MainContainer>
-      <FirstContainer>
-        <h1 className="title">Create your account easily! </h1>
-        <h2 className="subtitle">Already have an account? <Link to="/login">Sign In </Link></h2>
-        <img src={RegisterImg} alt="calendar" />
+      <FirstContainer
+        as={motion.section}
+        variants={propagationContainerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.h1 {...animationProps} className="title"> Create your account easily! </motion.h1>
+        <motion.h2 {...animationProps} className="subtitle">Already have an account? <Link to="/login">Sign In </Link></motion.h2>
+        <motion.img {...animationProps} src={RegisterImg} alt="calendar" />
       </FirstContainer>
-      <SecondContainer>
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="register-img-container">
-              <div className="input-group">
-                <input
-                  value={photoUrl}
-                  placeholder="Profile image Url.."
-                  onChange={(e) => handleChangePhotoUrl(e)}
-                />
-              </div>
-              <div className="or-container">
-                <div className="line"></div>
-                <p>or</p>
-                <div className="line"></div>
-              </div>
-              <button type="button" onClick={() => setIsModalOpen(true)}><BsPlusLg className="icon" /></button>
-            </div>
-
+      <SecondContainer
+        as={motion.section}
+        variants={propagationContainerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.form {...animationProps} className="form" onSubmit={handleSubmit}>
+          <div className="register-img-container">
             <div className="input-group">
               <input
-                value={email}
-                placeholder="Email..."
-                onChange={(e) => handleChangeEmail(e)}
+                value={photoUrl}
+                placeholder="Profile image Url.."
+                onChange={(e) => handleChangePhotoUrl(e)}
               />
-              {errors.some(({ field }: any) => field === 'email') && (
-                <span>{getErrorMessageByFieldName('email')}</span>
-              )}
             </div>
-
-            <div className="input-group">
-              <div className="password-input">
-                <input
-                  value={password}
-                  placeholder="Password..."
-                  onChange={(e) => handleChangePassword(e)}
-                  type={passIsVisible ? 'text' : 'password'}
-                />
-                {passIsVisible ? (
-                  <AiFillEyeInvisible className="eye-icon" onClick={() => setPassIsVisible(false)} />
-                ) : (
-                  <AiFillEye className="eye-icon" onClick={() => setPassIsVisible(true)} />
-                )}
-              </div>
-              {errors.some(({ field }: any) => field === 'password') && (
-                <span>{getErrorMessageByFieldName('password')}</span>
-              )}
+            <div className="or-container">
+              <div className="line"></div>
+              <p>or</p>
+              <div className="line"></div>
             </div>
+            <button type="button" onClick={() => setIsModalOpen(true)}><BsPlusLg className="icon" /></button>
+          </div>
 
-            <div className="input-group">
+          <div className="input-group">
+            <input
+              value={email}
+              placeholder="Email..."
+              onChange={(e) => handleChangeEmail(e)}
+            />
+            {errors.some(({ field }: any) => field === 'email') && (
+              <span>{getErrorMessageByFieldName('email')}</span>
+            )}
+          </div>
+
+          <div className="input-group">
+            <div className="password-input">
               <input
-                value={confirmedPassword}
-                placeholder="Confirm the password..."
-                onChange={(e) => handleChangeConfirmedPassword(e)}
-                type="password"
+                value={password}
+                placeholder="Password..."
+                onChange={(e) => handleChangePassword(e)}
+                type={passIsVisible ? 'text' : 'password'}
               />
-  
-              {errors.some(({ field }: any) => field === 'confirmedPassword') && (
-                <span>{getErrorMessageByFieldName('confirmedPassword')}</span>
+              {passIsVisible ? (
+                <AiFillEyeInvisible className="eye-icon" onClick={() => setPassIsVisible(false)} />
+              ) : (
+                <AiFillEye className="eye-icon" onClick={() => setPassIsVisible(true)} />
               )}
             </div>
-            <button type="submit">Register</button>
-          </form>
-          <h2 className="subtitle">Already have an account? <Link to="/login">Sign In </Link></h2>
+            {errors.some(({ field }: any) => field === 'password') && (
+              <span>{getErrorMessageByFieldName('password')}</span>
+            )}
+          </div>
+
+          <div className="input-group">
+            <input
+              value={confirmedPassword}
+              placeholder="Confirm the password..."
+              onChange={(e) => handleChangeConfirmedPassword(e)}
+              type="password"
+            />
+
+            {errors.some(({ field }: any) => field === 'confirmedPassword') && (
+              <span>{getErrorMessageByFieldName('confirmedPassword')}</span>
+            )}
+          </div>
+          <button type="submit">Register</button>
+        </motion.form>
+        <motion.h2 {...animationProps} className="subtitle">Already have an account? <Link to="/login">Sign In </Link></motion.h2>
       </SecondContainer>
       <ChooseProfileImgModal
         isModalOpen={isModalOpen}

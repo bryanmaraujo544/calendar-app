@@ -9,6 +9,9 @@ import { SecondContainer } from '../../components/Auth/SecondContainer';
 import RegisterImg from '../../assets/register-img.svg';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import isEmailValid from '../../utils/isEmailValid';
+import { propagationItemVariants } from '../../variants/propagationItemVariants';
+import { motion } from 'framer-motion';
+import { propagationContainerVariants } from '../../variants/propagationContainerVariants';
 
 export const Login = () => {
   const [email, setEmail] = useState('');
@@ -47,7 +50,6 @@ export const Login = () => {
     } else {
       removeError({ field: 'password', message: 'Password is required' });
     }
-
   }
 
   async function handleSubmit(e: any) {
@@ -59,51 +61,60 @@ export const Login = () => {
     }
   }
 
-  function cleanFields() {
-    setEmail('');
-    setPassword('');
+  const animationProps = {
+    variants: propagationItemVariants,
+    transition: { type: "spring", mass: 1, stiffness: 175 }
   }
-
   return (
     <MainContainer>
-      <FirstContainer>
-        <h1 className="title">Sign In to access your calendar </h1>
-        <h2 className="subtitle">Don't have an account? <Link to="/register">Sign Up </Link></h2>
-        <img src={RegisterImg} alt="calendar-image" />
+      <FirstContainer
+        as={motion.section}
+        variants={propagationContainerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.h1 {...animationProps} className="title">Sign In to access your calendar </motion.h1>
+        <motion.h2 {...animationProps} className="subtitle">Don't have an account? <Link to="/register">Sign Up </Link></motion.h2>
+        <motion.img {...animationProps} src={RegisterImg} alt="calendar" />
       </FirstContainer>
-      <SecondContainer>
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="input-group">
+      <SecondContainer
+        as={motion.section}
+        variants={propagationContainerVariants}
+        initial="hidden"
+        animate="show"
+      >
+        <motion.form {...animationProps} className="form" onSubmit={handleSubmit}>
+          <div className="input-group">
+            <input
+              value={email}
+              placeholder="Email..."
+              onChange={handleChangeEmail}
+            />
+            {errors.some(({ field }: any) => field === 'email') && (
+              <span>{getErrorMessageByFieldName('email')}</span>
+            )}
+          </div>
+          <div className="input-group">
+            <div className="password-input">
               <input
-                value={email}
-                placeholder="Email..."
-                onChange={handleChangeEmail}
+                value={password}
+                placeholder="Password..."
+                onChange={handleChangePassword}
+                type={passIsVisible ? 'text' : 'password'}
               />
-              {errors.some(({ field }: any) => field === 'email') && (
-                <span>{getErrorMessageByFieldName('email')}</span>
+              {passIsVisible ? (
+                <AiFillEyeInvisible className="eye-icon" onClick={() => setPassIsVisible(false)} />
+              ) : (
+                <AiFillEye className="eye-icon" onClick={() => setPassIsVisible(true)} />
               )}
             </div>
-            <div className="input-group">
-              <div className="password-input">
-                <input
-                  value={password}
-                  placeholder="Password..."
-                  onChange={handleChangePassword}
-                  type={passIsVisible ? 'text' : 'password'}
-                />
-                {passIsVisible ? (
-                  <AiFillEyeInvisible className="eye-icon" onClick={() => setPassIsVisible(false)} />
-                ) : (
-                  <AiFillEye className="eye-icon" onClick={() => setPassIsVisible(true)} />
-                )}
-              </div>
-              {errors.some(({ field }: any) => field === 'password') && (
-                <span>{getErrorMessageByFieldName('password')}</span>
-              )}
-            </div>
-            <button type="submit">Sign In</button>
-          </form>
-          <h2 className="subtitle">Don't have an account? <Link to="/register">Sign Up </Link></h2>
+            {errors.some(({ field }: any) => field === 'password') && (
+              <span>{getErrorMessageByFieldName('password')}</span>
+            )}
+          </div>
+          <button type="submit">Sign In</button>
+        </motion.form>
+        <motion.h2 {...animationProps} className="subtitle">Don't have an account? <Link to="/register">Sign Up </Link></motion.h2>
       </SecondContainer>
     </MainContainer>
   );

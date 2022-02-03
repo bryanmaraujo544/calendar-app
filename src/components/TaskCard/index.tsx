@@ -7,6 +7,7 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 import { BsFillCalendarEventFill } from 'react-icons/bs';
 import { MdModeEdit } from 'react-icons/md';
 import { EventModal } from '../EventModal';
+import { motion } from 'framer-motion';
 
 export const TaskCard = ({ title, date, description, id }: any) => {
   console.log({ date });
@@ -24,7 +25,13 @@ export const TaskCard = ({ title, date, description, id }: any) => {
 
   return (
     <>
-      <Container key={`${title}${date}`}>
+      <Container
+        key={`${title}${date}`} 
+        as={motion.div} 
+        layout
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+      >
         <div className="content-container">
           <div>
             <p className="title">{title}</p>

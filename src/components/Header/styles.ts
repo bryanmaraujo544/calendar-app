@@ -22,19 +22,43 @@ export const Container = styled.div`
   }
 
   .profile-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     aspect-ratio: 1 / 1;
     background: red;
     border-radius: 1rem;
-    background: ${({ theme }) => theme.gray[300]};
+    background: ${({ theme }) => theme.gray[400]};
     box-shadow: 0 3px 3px ${({ theme }) => theme.shadow.sm};
     overflow: hidden;
+    cursor: pointer;
+    transition: all .2s ease;
+
+
+    &:hover img {
+      opacity: 0.5;
+    }
+
+    &:hover .edit-icon {
+      transform: scale(1);
+    }
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: all .2s ease;
+    }
 
+    .edit-icon {
+      transform: scale(0);
+      font-size: 2.6rem;
+      color: ${({ theme }) => theme.blue.text};
+      position: absolute;
+      transition: all .2s ease;
+      
     }
   }
 `;

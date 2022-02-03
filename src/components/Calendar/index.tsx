@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { Container, CalendarContainer } from "./styles";
 
@@ -12,17 +13,18 @@ import { CalendarHeader } from './CalendarHeader';
 
 
 export const Calendar = (props: any) => {
-  const navigate = useNavigate();
-  const { tasks } = useContext(TasksContext);
-  const { setWhichItemIsActive, setTaskTitle } = useContext(HomeContext);
-
   const dt = new Date();
   const [date, setDate] = useState({ year: dt.getFullYear(), month: dt.getMonth() }); // State to storage the actual month and year of calendar
   const [daysOfActualMonth, setDaysOfActualMonth] = useState([] as number[]);
   const [lastDaysOfLastMonth, setLastDaysOfLastMonth] = useState([] as number[]);
-
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [eventDate, setEventDate] = useState(''); // Date of the square of calendar clicked
+  
+  const navigate = useNavigate();
+  const { tasks } = useContext(TasksContext);
+  console.log({ tasks });
+  const { setWhichItemIsActive, setTaskTitle } = useContext(HomeContext);
 
   const { firstDayDate, daysInMonth } = useMemo(() => getDaysInMonth(date.year, date.month), [date]); // This variable grabs how many days the actual month has and the date of the first day of the month
   const { daysInLastMonth } = getDaysOfPreviousMonth(date.year, date.month); // How many days the previous month has
@@ -50,7 +52,7 @@ export const Calendar = (props: any) => {
 
 
   function getLastDaysOfLastMonth() {
-    // This variable grab the first day of the month and returns which day it as of the week
+    // This variable grab the first day of the month and returns which day it is as of the week
     // For example: if the first day of month was on Saturday, it will return 6. Because Sat is the 7 day of the week
     // The index of week days is 0 - 6
     const firstDayMonthInWeekDay = firstDayDate.getDay();
@@ -77,13 +79,13 @@ export const Calendar = (props: any) => {
     setIsModalOpen(true);
   }
 
+  // function for user click in amount of tasks in certain date and see more informations about them at tasks page
   function handleSeeTasksByDate(dt: string) {
     const formattedDate = getFormattedDate(dt); // 2022-04-39
     setTaskTitle(formattedDate);
     navigate('/tasks');
     setWhichItemIsActive('tasks');
   }
-
 
   return (
     <Container>
