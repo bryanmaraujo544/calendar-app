@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# Calendar App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
-## Available Scripts
+![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-In the project directory, you can run:
+![Animation](https://user-images.githubusercontent.com/62571814/151380376-134ae4a8-2aa4-4883-b48b-dff77d56006c.gif)
 
-### `yarn start`
+> Application where the user can organize his tasks/event in the calendary.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Access the application on your browser: (https://weather-app-plum-nine.vercel.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 💻 How it works
 
-### `yarn test`
+To access the calendar app the user needs to sign in or create an accout if he doesn't has one. After logged, the user can navigate between the months of the year or of the last/next years, and create some task. There is a task page where contains all of tasks of that user. It's possible to edit the task informations and delete it either.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 💻 How it was made
 
-### `yarn build`
+For the front-end, I've used React and Typescript to create the interface and make all of the interactions with user's actions and with back-end services.  
+For the back-end, it was used Node.js and TypeScript to grab information from front-end, make the necessary processes and connect to database (PostgreSQL).  
+In the part of authentication it was used jwt for the exchanges of informations between client and server.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Technologies used in project
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React
+- TypeScript
+- Styled-Components
+- Framer Motion
+- Axios
+- Node.js
+- PostgreSQL
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ☕ How to start the project in your machine
 
-### `yarn eject`
+Once the repository is cloned in your computer, to use the calendar-app follow the steps below:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+  // Open one terminal and run the following code to install all dependencies:
+  yarn add
+  
+  // Then start the application
+  yarn start
+```
+Now you can access the application in http://localhost:3000
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📫 Contributing to dev-world
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+To contribute, follow the next steps:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Fork this repository.
+2. Create a new branch: `git checkout -b <branch_name>`.
+3. Make your changes and confirm them: `git commit -m '<commit_message>'`
+4. Send to the main branch: `git push origin <project_name> / <local>`
+5. Create the pull request.
 
-## Learn More
+As an alternative, check the documentation of the Github to lear how to make a pull request: (https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🤝 Developer
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/bryanmaraujo544.png" width="100px;" alt="Bryan's profile photo"/><br>
+        <sub>
+          <b>Bryan Martins</b>
+        </sub>
+      </a>
+    </td>
+
+</table>
+
