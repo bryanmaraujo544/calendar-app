@@ -12,11 +12,14 @@ export const CalendarHeader = ({
   setDate,
 }: any) => {
   const { tasks } = useContext(TasksContext);
+  const dateOfLastDayOfActualMonth = new Date(date.year, date.month + 1, 0);
+  const dateOfFirstDayOfActualMonth = new Date(date.year, date.month);
+
   
   const [hasTasksInLastMonths, setHasTasksInLastMonths] = useState(() => checkIfHasTasksInLastMonths());
   const [hasTasksInNextMonths, setHasTasksInNextMonths] = useState(() => checkIfHasTasksInNextMonths());
   
-
+  
   useEffect(() => {
     setHasTasksInLastMonths(checkIfHasTasksInLastMonths());
     setHasTasksInNextMonths(checkIfHasTasksInNextMonths());
@@ -53,12 +56,10 @@ export const CalendarHeader = ({
         }
       });
   }
-
-  const dateOfLastDayOfActualMonth = new Date(date.year, date.month + 1, 0);
-
+  
   function checkIfHasTasksInLastMonths() {
     const thereIs = tasks.some((task: any) => (
-      new Date(task.date) < dateOfLastDayOfActualMonth
+      new Date(task.date) < dateOfFirstDayOfActualMonth
     ));
     return thereIs;
   }
@@ -69,6 +70,7 @@ export const CalendarHeader = ({
     ));
     return thereIs;
   }
+
 
   return (
     <Container>
