@@ -3,6 +3,13 @@ import styled from 'styled-components';
 export const Container = styled.div`
   margin-top: 3.2rem;
 
+  .loading {
+    height: 4.8rem;
+    width: 4.8rem;
+    color: red !important;
+    margin: 3.2rem auto;
+  }
+
   .alert-container {
     width: 100%;
 

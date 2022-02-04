@@ -15,8 +15,8 @@ export const TaskCard = ({ title, date, description, id }: any) => {
   const { setTasks } = useContext(TasksContext);
 
   async function handleCheckEvent({ title, date, id }: any) {
-    await api.delete(`/tasks/${id}`);
     setTasks((prevTaks: any) => prevTaks.filter((task: any) => task.title !== title || task.date !== date ));
+    await api.delete(`/tasks/${id}`);
   }
 
   async function handleOpenEditModal() {

@@ -6,7 +6,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.6rem;
+  gap: 1.2rem;
 
   .menu-icon {
     display: none;
@@ -18,7 +18,6 @@ export const Container = styled.div`
     @media(max-width: 768px) {
       display: inline-block;
     }
-
   }
 
   .profile-container {
@@ -26,9 +25,8 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    aspect-ratio: 1 / 1;
-    background: red;
+    height: 5rem;
+    width: 5rem;
     border-radius: 1rem;
     background: ${({ theme }) => theme.gray[400]};
     box-shadow: 0 3px 3px ${({ theme }) => theme.shadow.sm};

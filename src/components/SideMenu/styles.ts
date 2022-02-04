@@ -151,10 +151,10 @@ export const Item = styled.div<ItemProps>`
     align-items: center;
     justify-content: center;
     background: ${({ theme }) => theme.red[200]};
-    height: 100%;
+    height: 3.2rem;
+    width: 3.2rem;
     border-radius: 1rem;
-    aspect-ratio: 1 / 1;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: ${({ theme }) => theme.white};
   }

@@ -6,11 +6,13 @@ import { motion, useAnimation } from 'framer-motion';
 import { overlayVariants } from '../../variants/overlayVariants';
 import { modalVariants } from '../../variants/modalVariants';
 
+import Loading from 'react-loading';
 import { IoClose } from 'react-icons/io5';
 import { TasksContext } from '../../contexts/TasksContext';
 import { useErrors } from '../../hooks/useErrors';
 import { api } from '../../services/api';
 import { getFormattedDate } from '../../utils/getFormattedDate';
+import { ThemeContext } from 'styled-components';
 
 interface Props {
   isModalOpen: boolean,
@@ -27,13 +29,15 @@ export const EventModal = ({
   isToEditEvent,
   taskId
 }: Props) => {
-  const overlayControl = useAnimation();
-  const { setTasks } = useContext(TasksContext);
-  const { setError, removeError, getErrorMessageByFieldName, errors } = useErrors();
-
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [inputDate, setDate] = useState(''); // State that storage the date of the event
+  const [isLoading, setIsLoading] = useState(false);
+
+  const overlayControl = useAnimation();
+  const { setTasks } = useContext(TasksContext);
+  const theme = useContext(ThemeContext);
+  const { setError, removeError, getErrorMessageByFieldName, errors } = useErrors();
 
   useEffect(() => {
     if (isModalOpen) {
@@ -94,12 +98,14 @@ export const EventModal = ({
   }
 
   async function createEvent() {
+    setIsLoading(true);
     const { data: { taskCreated } } = await api.post('/tasks', { title, description, date: eventDate });
     setTasks((prevTaks: any) => [...prevTaks, { title, description, date: eventDate, id: taskCreated.id }]);
-
+    setIsLoading(false);
   }
 
   async function updateEvent() {
+    setIsLoading(true);
     const { data: { taskUpdated } } = await api.put(`/tasks/${taskId}`, { title, description, date: eventDate });
     setTasks((prevTasks: any) => (
       prevTasks.map((task: any) => {
@@ -109,6 +115,7 @@ export const EventModal = ({
         return task;
       })
     ));
+    setIsLoading(false);
 
   }
 
@@ -142,7 +149,18 @@ export const EventModal = ({
           <InputGroup>
             <input value={inputDate} type="date" onChange={(e) => setDate(e.target.value)} />
           </InputGroup>
-          <button type="submit">Create</button>
+          <button type="submit">
+            {isLoading ? (
+              <Loading 
+                type="spinningBubbles" 
+                height={24} 
+                width={24} 
+                color={theme.title === 'light' ? '#fff' : '#000'}
+              />
+            ) : (
+              'Create'
+            )}
+          </button>
         </Form>
       </ModalContainer>
     </Overlay>,

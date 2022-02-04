@@ -13,7 +13,8 @@ interface Task {
 }
 interface TaskProps {
   tasks: Task[],
-  setTasks: any
+  setTasks: any,
+  isTasksLoading: boolean
 }
 
 export const TasksContext = createContext({} as TaskProps);
@@ -21,16 +22,18 @@ export const TasksContext = createContext({} as TaskProps);
 export const TasksProvider = ({ children }: Props) => {
   const { '@token': token } = parseCookies();
   const [tasks, setTasks] = useState([]);
+  const [isTasksLoading, setIsTasksLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       const { data } = await api.get(`/tasks/${token}`);
       setTasks(data);
+      setIsTasksLoading(false);
     })();
   }, []);
 
   return (
-    <TasksContext.Provider value={{ tasks, setTasks }}>
+    <TasksContext.Provider value={{ tasks, setTasks, isTasksLoading }}>
       {children}
     </TasksContext.Provider>
   )

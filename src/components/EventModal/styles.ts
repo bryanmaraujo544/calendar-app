@@ -63,6 +63,9 @@ export const Form = styled.form`
     padding: 1rem 0;
     font-size: 1.6rem;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       background: ${({ theme }) => theme.blue.main[300]};
