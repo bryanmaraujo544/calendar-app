@@ -29,7 +29,7 @@ const photos = [
 interface Props {
   isModalOpen: boolean,
   setIsModalOpen: any,
-  setPhotoUrl: any,
+  setPhotoUrl?: any,
   isToUpdateProfilePhoto?: boolean
 }
 

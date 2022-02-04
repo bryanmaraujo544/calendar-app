@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Search } from '../Search';
 import { Container } from './styles';
-import { HomeContext } from '../../pages/Home';
 import { AuthContext } from '../../contexts/AuthContext';
 import { ChooseProfileImgModal } from '../ChooseProfileImgModal';
 
@@ -16,13 +15,7 @@ export const Header = ({
   setSideMenuIsOpen
 }: Props) => {
   const { user } = useContext(AuthContext);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newPhotoUrl, setNewPhotoUrl] = useState('');
-
-  useEffect(() => {
-    setNewPhotoUrl(user.profile_image);
-  }, [user]);
 
   return (
     <>
@@ -37,7 +30,6 @@ export const Header = ({
       <ChooseProfileImgModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
-        setPhotoUrl={setNewPhotoUrl}
         isToUpdateProfilePhoto
       />
     </>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Overlay, ModalContainer, Form, InputGroup } from './styles';
@@ -44,7 +45,7 @@ export const EventModal = ({
     }
   }, [isModalOpen]);
 
-  const handleCloseModal = useCallback(() => {
+  function handleCloseModal() {
     setIsModalOpen(false);
     setTitle('');
     setDescription('');
@@ -52,16 +53,16 @@ export const EventModal = ({
     removeError({ field: 'title', message: "title can't be empty" });
     removeError({ field:  'description', message: 'Description is too long'});
     overlayControl.start('hidden');
-  }, []);
+  }
 
-  const handleChangeTitle = useCallback((event: any) => {
+  function handleChangeTitle(event: any) {
     setTitle(event.target.value);
     if (!event.target.value) {
       setError({ field: 'title', message: "Title can't be empty"  });
     } else {
       removeError({ field: 'title', message: "title can't be empty" });
     }
-  }, []);
+  }
 
   function handleChangeDescription(event: any) {
     setDescription(event.target.value);
@@ -92,13 +93,13 @@ export const EventModal = ({
     }
   }
 
-  const createEvent = useCallback(async () => {
+  async function createEvent() {
     const { data: { taskCreated } } = await api.post('/tasks', { title, description, date: eventDate });
     setTasks((prevTaks: any) => [...prevTaks, { title, description, date: eventDate, id: taskCreated.id }]);
 
-  }, [title, description, inputDate]);
+  }
 
-  const updateEvent = useCallback(async () => {
+  async function updateEvent() {
     const { data: { taskUpdated } } = await api.put(`/tasks/${taskId}`, { title, description, date: eventDate });
     setTasks((prevTasks: any) => (
       prevTasks.map((task: any) => {
@@ -109,7 +110,7 @@ export const EventModal = ({
       })
     ));
 
-  }, [title, description, inputDate]);
+  }
 
   return ReactDOM.createPortal(
     <Overlay
