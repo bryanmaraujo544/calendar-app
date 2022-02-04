@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { Overlay, ModalContainer, Form, InputGroup } from './styles';
 import { motion, useAnimation } from 'framer-motion';
