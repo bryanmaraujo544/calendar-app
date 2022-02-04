@@ -8,7 +8,7 @@
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge)
 
-![Animation](https://user-images.githubusercontent.com/62571814/151380376-134ae4a8-2aa4-4883-b48b-dff77d56006c.gif)
+![Animation](https://user-images.githubusercontent.com/62571814/152456153-e7baff20-2414-4f97-b94e-4f0893abda57.gif)
 
 > Application where the user can organize his tasks/event in the calendary.
 
