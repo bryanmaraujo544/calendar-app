@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Container } from './styles';
 import { TiArrowSortedUp } from 'react-icons/ti';
 import { getMonthName } from '../../../utils/getMonthName';
