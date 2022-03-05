@@ -25,14 +25,14 @@ export const SecondContainer = styled.section`
 
       span {
         font-size: 1.2rem;
-        margin-top: .4rem;
-        color: #FF1F1F;
+        margin-top: 0.4rem;
+        color: #ff1f1f;
       }
     }
 
     input {
       position: relative;
-      background: #E9ECEF;
+      background: #e9ecef;
       padding: 0 1.6rem;
       height: 5.6rem;
       width: 100%;
@@ -41,10 +41,10 @@ export const SecondContainer = styled.section`
 
       font-size: 1.4rem;
       font-weight: 700;
-      color: #6C757D;
+      color: #6c757d;
 
       &::placeholder {
-        color: #ADB5BD;
+        color: #adb5bd;
         font-weight: 700;
       }
     }
@@ -52,7 +52,7 @@ export const SecondContainer = styled.section`
     .password-input {
       display: flex;
       align-items: center;
-      background: #E9ECEF;
+      background: #e9ecef;
       padding: 0 1.6rem;
       height: 5.6rem;
       width: 100%;
@@ -66,46 +66,49 @@ export const SecondContainer = styled.section`
 
       .eye-icon {
         font-size: 2.2rem;
-        color: #6C757D;
+        color: #6c757d;
         cursor: pointer;
-        transition: all .2s ease;
+        transition: all 0.2s ease;
 
         &:hover {
           transform: scale(1.1);
         }
       }
-
     }
 
-
-    button[type=submit] {
-      margin-top: .8rem;
+    button[type='submit'] {
+      margin-top: 0.8rem;
       height: 4.8rem;
-      background: #1F87FF;
+      background: #1f87ff;
       font-size: 1.8rem;
       letter-spacing: 0.75px;
       font-weight: 700;
       color: #fff;
       border-radius: 1rem;
-      box-shadow: 0 1px 8px #479DFF;
-      transition: background .2s ease-in;
+      box-shadow: 0 1px 8px #479dff;
+      transition: background 0.2s ease-in;
 
       &:hover {
-        background: #0072F5;
+        background: #0072f5;
       }
       &:active {
-        background: #479DFF;
+        background: #479dff;
+      }
+
+      &:disabled {
+        background: #adb5bd;
+        box-shadow: 0 1px 8px #6c757d;
+        cursor: not-allowed;
       }
     }
-
 
     .register-img-container {
       display: flex;
       align-items: center;
-      gap: .8rem;
+      gap: 0.8rem;
 
       .or-container {
-        padding: .4rem 0;
+        padding: 0.4rem 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -113,13 +116,13 @@ export const SecondContainer = styled.section`
 
         p {
           font-size: 1.2rem;
-          color: #ADB5BD;
+          color: #adb5bd;
         }
 
         .line {
           width: 2px;
           flex: 1;
-          background: #ADB5BD;
+          background: #adb5bd;
         }
       }
 
@@ -127,14 +130,14 @@ export const SecondContainer = styled.section`
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #ADB5BD;
+        background: #adb5bd;
         color: #fff;
         height: 100%;
         aspect-ratio: 1 / 1;
         border-radius: 1rem;
-        transition: background .2s ease;
+        transition: background 0.2s ease;
         &:hover {
-          background: #6C757D;
+          background: #6c757d;
         }
 
         .icon {
@@ -142,17 +145,16 @@ export const SecondContainer = styled.section`
         }
       }
     }
-
   }
 
   .subtitle {
-    color: #6C757D;
+    color: #6c757d;
     font-size: 1.5rem;
     margin-top: 1.6rem;
     font-weight: 500;
 
     a {
-      color: #0072F5;
+      color: #0072f5;
       font-weight: 700;
     }
   }

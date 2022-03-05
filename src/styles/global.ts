@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const global = createGlobalStyle`
   * {
@@ -30,6 +30,11 @@ const global = createGlobalStyle`
     height: 100%;
     max-width: 100vw;
     overflow-x: hidden;
+  }
+
+  input {
+    appearance: none !important;
+    background: orange;
   }
 
   html {
