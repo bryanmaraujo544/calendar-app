@@ -13,7 +13,7 @@
 
 > Application where the user can organize his tasks/event in the calendary.
 
-### Access the application on your browser: (https://weather-app-plum-nine.vercel.app/)
+### Access the application on your browser: (https://calendar-app-delta.vercel.app/login)
 
 ## 💻 How it works
 
